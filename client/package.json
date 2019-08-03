@@ -6,6 +6,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
+    "react-strap": "0.0.1",
     "reactstrap": "^8.0.1"
   },
   "scripts": {
@@ -28,5 +29,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
