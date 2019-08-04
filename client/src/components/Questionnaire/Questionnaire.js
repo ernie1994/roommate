@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Wrapper } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, Container, Wrapper, Row, Col, } from 'reactstrap';
 import API from '../../utils/API';
 // const mongoose = require("mongoose");
 // const db = require('../../models/user')
@@ -9,8 +9,11 @@ class Questionnaire extends React.Component {
 
 	state = {
 		name: "",
-		age: "",
+		age: 0,
 		gender: "",
+		state: "",
+		city: "",
+		zip: ""
 
 	}
 
@@ -24,70 +27,87 @@ class Questionnaire extends React.Component {
 	};
 
 	handleFormSubmit = () => {
-	
-
-		console.log("btn test");
-
 		API.saveInfo({
 			name: this.state.name,
 			age: this.state.age,
-			gender: this.state.gender
-		}).then(function(res){
+			gender: this.state.gender,
+			state: this.state.state,
+			city: this.state.city,
+			zip: this.state.zip
+		}).then(function (res) {
 			console.log(res)
 		})
-
-
-
-
 	}
 
 
 	render() {
 		return (
-			
-			<form name="roommateSurvey" id="roommateSurvey">
-				<div className="form-group">
-					<label>Name</label>
-					<small id="nameHelp" className="form-text text-muted">Lets introduce ourselves...</small> 
-					<input type="text" className="form-control" name="name" placeholder="My name is...." onChange={this.handleInputChange}/>
-				</div>
-				<div className="form-group">
-					<label>Age</label>
+			<Form name="roommateSurvey" id="roommateSurvey">
+				<FormGroup className="form-group">
+					<Label>Name</Label>
+					<small id="nameHelp" className="form-text text-muted">Lets introduce ourselves...</small>
+					<Input type="text" className="form-control" name="name" placeholder="My name is...." onChange={this.handleInputChange} />
+				</FormGroup>
+				<FormGroup className="form-group">
+					<Label>Age</Label>
 					<small id="ageHelp" className="form-text text-muted">Not to be rude, but...</small>
-					<input type="text" className="form-control" name="age" placeholder="Well if you must know..." onChange={this.handleInputChange}/>
-				</div>
-				<div className="form-group">
-					<label>Gender</label>
+					<Input type="text" className="form-control" name="age" placeholder="Well if you must know..." onChange={this.handleInputChange} />
+				</FormGroup>
+				<Label>Address</Label>
+				<Row className="form-row">
+
+					<Col md={7}>
+						<Input type="text" className="form-control" placeholder="State" name="state" onChange={this.handleInputChange} />
+					</Col>
+					<Col >
+						<Input type="text" className="form-control" placeholder="City" name="city" onChange={this.handleInputChange} />
+					</Col>
+					<Col >
+						<Input type="text" className="form-control" placeholder="Zipcode" name="zip" onChange={this.handleInputChange} />
+					</Col>
+				</Row>
+				<FormGroup className="form-group">
+					<Label>Gender</Label>
 					<select className="form-control" name="gender" onChange={this.handleInputChange}>
+						<option hidden></option>
 						<option value="male">Male</option>
 						<option value="female">Female</option>
 						<option value="nonbinary">Nonbinary</option>
-						<option value="other">Other</option>
 						<option value="prefer not to say">Prefer not to say</option>
 					</select>
-				</div>
-				<div className="form-group">
+				</FormGroup>
+				<FormGroup>
 					<legend>Additional Info</legend>
 					<small className="form-text text-muted">Lets fill in some blanks...</small>
-					<div className="form-group" id="additionalInfo">
-						<label>Do you have any pet allergies?</label>
-						<div className="form-check">
-							<input className="form-check-input" type="checkbox" id="checkbox1" value="Dogs" />
-							<label>Dogs</label>
-						</div>
-						<div className="form-check">
-							<input className="form-check-input" type="checkbox" id="checkbox2" value="Cats" />
-							<label>Cats</label>
-						</div>
-						<div className="form-check">
-							<input className="form-check-input" type="checkbox" id="checkbox3" value="Other" />
-							<label>Other</label>
-						</div>
-					</div>
-				</div>
-				<button type="button" className="btn btn-primary" onClick={this.handleFormSubmit}>Submit Form</button>
-			</form>
-			
+					<Label className="mr-5">Do you have any pet allergies?</Label>
+					
+					<FormGroup check inline>
+						<Label check>
+							<Input type="checkbox" id="allergyCheckbox1" value="Cats" />Cats
+						</Label>
+					</FormGroup>
+					<FormGroup check inline>
+						<Label check>
+							<Input type="checkbox" id="allergyCheckbox2" value="Dogs" />Dogs
+						</Label>
+					</FormGroup>
+					<FormGroup check inline>
+						<Label check>
+							<Input type="checkbox" id="allergyCheckbox3" value="Other" />Other
+						</Label>
+					</FormGroup>
+					<FormGroup check inline>
+						<Label check>
+							<Input type="checkbox" id="allergyCheckbox4" value="No allergies" />No allergies
+						</Label>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup>
+					<Label for="bio">Tell us a little bit about yourself</Label>
+					<Input type="textarea" name="bioField" id="bio" />
+				</FormGroup>
+				<Button outline color="success" onClick={this.handleFormSubmit}>Submit Form</Button>
+			</Form>
 		)
 	}
 }
