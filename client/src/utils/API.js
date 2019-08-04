@@ -7,7 +7,11 @@ export default {
 	},
 
 	findRooms: function (info) {
-		return axios.get("/api/search", { params: info });
+		var url = "/api/rooms?";
+		for (var key in info) {
+			url += `${key}=${info[key]}&`;
+		}
+		return axios.get(url);
 	}
 
 };

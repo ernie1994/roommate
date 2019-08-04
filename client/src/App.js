@@ -15,7 +15,7 @@ class App extends React.Component {
         return (
             <>
                 <Nav />
-                <Container fluid style={styles.container}>
+                <Container style={styles.container}>
                     <Router>
                         <Switch>
                             <Route exact path="/" component={SearchForm}></Route>

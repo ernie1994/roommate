@@ -1,5 +1,5 @@
 import React from "react";
-import { Jumbotron, Form, FormGroup, Label, Input, Col, Button } from "reactstrap";
+import { Jumbotron, Form, FormGroup, Label, Input, Col, Button, Row } from "reactstrap";
 import SearchResult from "./SearchResult";
 import API from "../utils/API";
 
@@ -49,7 +49,14 @@ class SearchForm extends React.Component {
             });
 
             return (
-                <div>{results}</div>
+                <div>
+                    <Row>
+                        <Col xs="10" sm="8" className="justify-content-start my-5">
+                            <Button onClick={() => this.setState({ results: [] })}>Back</Button>
+                        </Col>
+                    </Row>
+                    <div>{results}</div>
+                </div>
             );
         }
 
