@@ -8,16 +8,16 @@ const mongoose = require("mongoose");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/userlist", {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/userlist", { useNewUrlParser: true });
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV) {
 
-	console.log("we in production baby");
+    console.log("we in production baby");
     app.use(express.static("client/build"));
 }
 
-app.use(apiRoutes);
+app.use("/api", apiRoutes);
 
 // Send every request to the React app
 // Define any API routes before this runs

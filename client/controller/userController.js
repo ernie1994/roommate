@@ -1,17 +1,20 @@
 const db = require('../models');
 
 module.exports = {
-	create: function(req,res) {
+	create: function (req, res) {
 		console.log(req.body);
 		db.User.create(req.body)
-		.then(dbModel => res.json(dbModel))
-		.catch(err => res.status(422).json(err));
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.status(422).json(err));
 	},
-	getAll: function(req,res){
+	getAll: function (req, res) {
 		db.User.find()
-		.then(data=>res.json(data))
-		.catch(err => res.status(422).json(err));
+			.then(data => res.json(data))
+			.catch(err => res.status(422).json(err));
+	},
+	deleteAll: function (req, res) {
+		db.User.deleteMany({})
+			.then(data => res.json(data))
+			.catch(err => res.status(422).json(err));
 	}
-
-
 }

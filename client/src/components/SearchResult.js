@@ -5,7 +5,6 @@ import {
 } from 'reactstrap';
 
 class SearchResult extends React.Component {
-
     render() {
         return (
             <Card className="mb-3">
@@ -15,8 +14,8 @@ class SearchResult extends React.Component {
                     </Col>
                     <Col md="8">
                         <CardBody>
-                            <CardTitle tag="h1">{this.props.name}</CardTitle>
-                            <CardSubtitle tag="h6">{this.props.address}</CardSubtitle>
+                            <CardTitle tag="h1">{this.props.user ? this.props.user.name : "No Name"}</CardTitle>
+                            <CardSubtitle tag="h6">{`${this.props.address}, ${this.props.city}, ${this.props.state} ${this.props.zip}`}</CardSubtitle>
                             <br></br>
                             <CardText>{this.props.description}</CardText>
                         </CardBody>
