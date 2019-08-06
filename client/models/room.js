@@ -1,0 +1,20 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const roomSchema = new Schema({
+    address: { type: String },
+    state: { type: String },
+    city: { type: String },
+    zip: { type: String },
+    image: { type: String },
+    description: { type: String },
+    dogAllergy: Boolean,
+    catAllergy: Boolean,
+    otherAllergy: Boolean,
+    gender: { type: String },
+    user: { type: Schema.Types.ObjectId, ref: "User" }
+})
+
+const Room = mongoose.model("Room", roomSchema);
+
+module.exports = Room;
