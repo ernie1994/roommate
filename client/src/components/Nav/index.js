@@ -7,6 +7,9 @@ function Nav() {
                 Home
             </a>
             <ul className="navbar-nav">
+				<li className="nav-item">
+					<a className="nav-link" href="/login">Sign Up/Log in</a>
+				</li>
                 <li className="nav-item">
                     <a className="nav-link" href="/">Post a Room</a>
                 </li>
@@ -14,6 +17,9 @@ function Nav() {
                     <a className="nav-link" href="/search">
                         Search Room</a>
                 </li>
+				<li className="nav-item">
+					<a className="nav-link" href="/questionnaire">Questionnaire</a>
+				</li>
             </ul>
         </nav>
     );

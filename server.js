@@ -17,7 +17,7 @@ if (process.env.NODE_ENV) {
     app.use(express.static("client/build"));
 }
 
-app.use("/api", apiRoutes);
+app.use("/", apiRoutes);
 
 // Send every request to the React app
 // Define any API routes before this runs
