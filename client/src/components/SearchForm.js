@@ -65,7 +65,6 @@ class SearchForm extends React.Component {
             jumbotron: {
                 backgroundImage: `url(${Background})`,
                 width: "100%",
-                height: "400px",
             },
             header: {
                 color: "white",
