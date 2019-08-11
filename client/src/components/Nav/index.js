@@ -8,7 +8,7 @@ function Nav() {
             </a>
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <a className="nav-link" href="/">Post a Room</a>
+                    <a className="nav-link" href="/post">Post a Room</a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" href="/search">

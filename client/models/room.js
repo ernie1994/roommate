@@ -6,14 +6,14 @@ const roomSchema = new Schema({
     state: { type: String },
     city: { type: String },
     zip: { type: String },
-    image: { type: String },
     description: { type: String },
     dogAllergy: Boolean,
     catAllergy: Boolean,
     otherAllergy: Boolean,
     gender: { type: String },
-    user: { type: Schema.Types.ObjectId, ref: "User" }
-})
+    user: { type: Schema.Types.ObjectId, ref: "User" },
+    images: [{ type: Schema.Types.ObjectId, ref: "Image" }]
+});
 
 const Room = mongoose.model("Room", roomSchema);
 
