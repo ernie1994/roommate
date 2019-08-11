@@ -2,9 +2,33 @@ const db = require('../models');
 
 module.exports = {
     create: function (req, res) {
+
+        let roomId;
+
         db.Room.create(req.body)
-            .then(dbModel => res.json(dbModel))
+            .then(room => {
+                roomId = room._id;
+                const imageArray = [];
+                req.body.urls.forEach(url => {
+                    imageArray.push({ url: url });
+                });
+                return db.Image.create(imageArray);
+            })
+            .then(images => {
+                const ids = [];
+                images.forEach(image => ids.push(image._id));
+                db.Room.findOneAndUpdate(
+                    { _id: roomId },
+                    { $push: { images: { $each: ids } } },
+                    { new: true },
+                    (err, room) => {
+                        if (err) throw err;
+                        res.json(room);
+                    }
+                );
+            })
             .catch(err => res.status(422).json(err));
+
     },
     getAll: function (_req, res) {
         db.Room.find().populate("user")

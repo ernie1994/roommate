@@ -6,8 +6,8 @@ const userSchema = new Schema({
 	name: { type: String },
 	age: { type: String },
 	gender: { type: String },
-	rooms: [{ type: Schema.Types.ObjectId, ref: "Room" }]
-})
+	rooms: [{ type: Schema.Types.ObjectId, ref: "Room" }],
+});
 
 const User = mongoose.model("User", userSchema);
 

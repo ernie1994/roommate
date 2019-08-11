@@ -80,7 +80,7 @@ class SearchForm extends React.Component {
                     <FormGroup row className="d-flex justify-content-center">
                         <Col xs="10" sm="8">
                             <Label for="location">Location</Label>
-                            <Input onChange={this.handleChange} type="text" name="location" id="location" placeholder="Enter city, state or zip code" />
+                            <Input required onChange={this.handleChange} type="text" name="location" id="location" placeholder="Enter city, state or zip code" />
                         </Col>
                     </FormGroup>
                     <FormGroup row className="d-flex justify-content-center">
@@ -120,7 +120,7 @@ class SearchForm extends React.Component {
                     </FormGroup>
                     <FormGroup row className="d-flex justify-content-center">
                         <Col xs="10" sm="8" className="d-flex justify-content-end">
-                            <Button size="lg">Submit</Button>
+                            <Button size="lg">Search</Button>
                         </Col>
                     </FormGroup>
                 </Form>
