@@ -1,8 +1,10 @@
 import React from 'react';
-import {Card, CardText, CardBody, Form, FormGroup, Label, Input, FormText, Container, Wrapper, Button} from 'reactstrap';
+import { Card, CardText, CardBody, Form, FormGroup, Label, Input, FormText, Container, Wrapper, Button } from 'reactstrap';
 
 
 import API from '../../utils/API';
+
+import axios from "axios";
 
 class UserLogin extends React.Component {
 
@@ -20,7 +22,7 @@ class UserLogin extends React.Component {
 		});
 
 	}
-	
+
 	handleFormSubmit = () => {
 		// API.createUser({
 		// 	username: this.state.username,
@@ -31,18 +33,16 @@ class UserLogin extends React.Component {
 		API.loginUser({
 			username: this.state.username,
 			password: this.state.password
-		}).then(function(res){
-			console.log(res);
+		}).then(function (res) {
+			axios.get("/api/user").then((data) => {
+				console.log("we made it bitch", data);
+			})
 		})
 	}
 
-	test = () => {
-		API.userTest().then(function(res){
-			console.log(res);
-		})
-	}
 
-	
+
+
 	render() {
 		return (
 			<div>

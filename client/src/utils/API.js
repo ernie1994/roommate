@@ -16,18 +16,19 @@ export default {
 		return axios.get(url);
 	},
 
-	createUser: function(info) {
+	createUser: function (info) {
 		console.log(info);
-		return axios.post('/signup', info);
-	}, 
-
-	loginUser: function(info) {
-		// console.log(info);
-		return axios.post('/login', info);
-		
+		return axios.post('api/signup', info);
 	},
 
-	userTest: function() {
+	loginUser: function (info) {
+		// console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+		console.log(info);
+		return axios.post('/api/login', info);
+
+	},
+
+	userTest: function () {
 		return axios.get('/login');
 	}
 
