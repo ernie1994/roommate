@@ -11,11 +11,11 @@ app.use(express.json());
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/userlist", { useNewUrlParser: true });
 
 // Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV) {
+// if (process.env.NODE_ENV) {
 
-    console.log("we in production baby");
-    app.use(express.static("client/build"));
-}
+console.log("we in production baby");
+app.use(express.static("client/build"));
+// }
 
 app.use("/api", apiRoutes);
 

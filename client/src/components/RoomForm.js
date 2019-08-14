@@ -68,6 +68,7 @@ class RoomForm extends React.Component {
                     }
                 });
         });
+
     };
 
     handleChange = event => {
