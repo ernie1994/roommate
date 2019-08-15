@@ -11,8 +11,7 @@ function Nav() {
                     <a className="nav-link" href="/post">Post a Room</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="/search">
-                        Search Room</a>
+                    <a className="nav-link" href="/account">Account</a>
                 </li>
             </ul>
         </nav>

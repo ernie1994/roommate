@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Questionnaire from './components/Questionnaire/Questionnaire';
+// import Questionnaire from './components/Questionnaire/Questionnaire';
 
 import Nav from "./components/Nav/index"
 import { Container } from "reactstrap";
@@ -12,13 +12,15 @@ class App extends React.Component {
     var styles = {
       container: {
         paddingLeft: "0px",
-        paddingRight: "0px"
+        paddingRight: "0px",
+        marginLeft: "0px",
+        marginRight: "0px"
       }
     };
     return (
       <>
         <Nav />
-        <Container style={styles.container}>
+        <Container fluid style={styles.container}>
           <Router>
             <Switch>
               <Route exact path="/" component={SearchForm}></Route>

@@ -7,10 +7,14 @@ import {
 class SearchResult extends React.Component {
     render() {
         return (
-            <Card className="mb-3">
+            <Card
+                onClick={
+                    () => this.props.handleRoomClick({ ...this.props })
+                }
+                className="mb-3">
                 <Row className="no-gutters">
                     <Col md="4">
-                        <CardImg src={this.props.image} alt=""></CardImg>
+                        <CardImg src={this.props.images[0] ? this.props.images[0].url : this.props.image} alt=""></CardImg>
                     </Col>
                     <Col md="8">
                         <CardBody>

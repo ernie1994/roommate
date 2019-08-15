@@ -65,7 +65,7 @@ module.exports = {
             query["$or"] = arr;
         }
 
-        db.Room.find(query).populate("user")
+        db.Room.find(query).populate("user").populate("images")
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err))
     },

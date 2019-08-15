@@ -3,6 +3,7 @@ import { Jumbotron, Form, FormGroup, Label, Input, Col, Button, Row } from "reac
 import SearchResult from "./SearchResult";
 import API from "../utils/API";
 import Background from "../srcImages/condo2.jpg";
+import RoomDetail from "./RoomDetail";
 
 class SearchForm extends React.Component {
 
@@ -12,7 +13,13 @@ class SearchForm extends React.Component {
         dogAllergy: false,
         catAllergy: false,
         otherAllergy: false,
-        results: []
+        results: [],
+        room: null
+    };
+
+    handleBack = () => {
+        const newState = this.state.room ? { room: null } : { results: [] };
+        this.setState(newState);
     };
 
     handleSubmit = event => {
@@ -42,25 +49,11 @@ class SearchForm extends React.Component {
         });
     };
 
+    handleRoomClick = room => {
+        this.setState({ room: room });
+    };
+
     render() {
-
-        if (this.state.results.length !== 0) {
-            var results = this.state.results.map(result => {
-                return <SearchResult key={result.description} {...result} />;
-            });
-
-            return (
-                <div>
-                    <Row>
-                        <Col xs="10" sm="8" className="justify-content-start my-5">
-                            <Button onClick={() => this.setState({ results: [] })}>Back</Button>
-                        </Col>
-                    </Row>
-                    <div>{results}</div>
-                </div>
-            );
-        }
-
         const styles = {
             jumbotron: {
                 backgroundImage: `url(${Background})`,
@@ -71,6 +64,25 @@ class SearchForm extends React.Component {
                 textAlign: "center"
             }
         };
+
+        const BackButton = (
+            <div>
+                <Row className="mx-5 my-5">
+                    <Col xs="10" sm="8" className="justify-content-start">
+                        <Button onClick={this.handleBack}>Back</Button>
+                    </Col>
+                </Row>
+            </div>
+        );
+
+        if (this.state.room) return (<>{BackButton}<RoomDetail room={this.state.room} /></>);
+
+        if (this.state.results.length !== 0) {
+            var results = this.state.results.map(result => {
+                return <SearchResult handleRoomClick={this.handleRoomClick} key={result._id} {...result} />;
+            });
+            return (<>{BackButton}<div className="mx-5">{results}</div> </>);
+        }
 
         return (
             <div>
