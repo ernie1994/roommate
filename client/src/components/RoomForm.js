@@ -65,7 +65,8 @@ class RoomForm extends React.Component {
                     //this code should change.
                     //user should probably go to a detail page of the room???
                     if (window.confirm("Your room was successfully posted")) {
-                        window.location.reload();
+                        // window.location.reload()
+                        console.log(_res);
                     }
                 });
         });

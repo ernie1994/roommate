@@ -5,6 +5,8 @@ module.exports = {
 
         let roomId;
 
+        console.log("route hit\n\n\n\n\n\n\n\n");
+
         db.Room.create(req.body)
             .then(room => {
                 roomId = room._id;
