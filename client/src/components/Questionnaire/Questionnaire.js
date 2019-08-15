@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Wrapper, Row, Col, } from 'reactstrap';
 import API from '../../utils/API';
 import { timingSafeEqual } from 'crypto';
+import Axios from 'axios';
 // const mongoose = require("mongoose");
 // const db = require('../../models/user')
 // const User = require('../../models/user.js');
@@ -30,24 +31,42 @@ class Questionnaire extends React.Component {
 	};
 
 	handleFormSubmit = () => {
-		API.saveInfo({
-			username: this.state.username,
-			password: this.state.password,
+		// API.saveInfo({
+		// 	username: this.state.username,
+		// 	password: this.state.password,
+		// 	name: this.state.name,
+		// 	age: this.state.age,
+		// 	gender: this.state.gender,
+		// 	state: this.state.state,
+		// 	city: this.state.city,
+		// 	zip: this.state.zip
+		// }).then(function (res) {
+		// 	console.log(res)
+		// })
+		API.updateUser({
 			name: this.state.name,
 			age: this.state.age,
 			gender: this.state.gender,
 			state: this.state.state,
 			city: this.state.city,
 			zip: this.state.zip
-		}).then(function (res) {
-			console.log(res)
+		}).then(function(res){
+			console.log(res);
+		})
+	}
+
+	userTest = () => {
+		Axios.get('/api/user').then((response)=> {
+			console.log(response);
 		})
 	}
 
 
 	render() {
 		return (
+			
 			<Form name="roommateSurvey" id="roommateSurvey">
+				<Button onClick={this.userTest}>USER TEST BTN</Button>
 				<FormGroup>
 					<Label>Username</Label>
 					<Input type="text" name="username" onChange={this.handleInputChange} />
