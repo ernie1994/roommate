@@ -18,6 +18,7 @@ class RoomForm extends React.Component {
         gender: "mix",
         user: this.props.user,
         files: []
+
     };
 
     uploadImages = (files, cb) => {

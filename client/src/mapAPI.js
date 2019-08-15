@@ -6,6 +6,26 @@ const places = [{ city: 'rancho', latitude: 38.583398, longitude: 121.283237 },
 { city: 'Natomas', latitude: 38.615832, longitude: 121.497858 },
 { city: 'San Jose', latitude: 37.275687, longitude: 121.838733 }];
 
+
+$.ajax({
+    url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}A&key=AIzaSyBQ1_V_WrUt_H5buMATmErTV5MJp-LedFE`,
+    method: "GET"
+}).then(res => {
+    var lat = '';
+    var lng = '';
+    var address = address;
+    geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            lat = results[0].geometry.location.lat();
+            lng = results[0].geometry.location.lng();
+
+        } else {
+            console.log("Geocode was not successful for the following reason: " + status);
+        }
+    });
+
+    console.log('Latitude: ' + lat + ' Logitude: ' + lng);
+});
 //Radisu from user input
 const radius = 10000;
 
