@@ -122,6 +122,14 @@ class RoomForm extends React.Component {
                             <Input required onChange={this.handleChange} type="text" name="address" id="address" placeholder="Enter address" />
                         </Col>
                     </FormGroup>
+
+                    <FormGroup row className="d-flex justify-content-center">
+                        <Col xs="10" sm="8">
+                            <Label for="city">City</Label>
+                            <Input required onChange={this.handleChange} type="text" name="city" id="city" placeholder="Enter city or town" />
+                        </Col>
+                    </FormGroup>
+
                     <FormGroup row className="d-flex justify-content-center">
                         <Col xs="10" sm="8">
                             <Label for="state">State</Label>
