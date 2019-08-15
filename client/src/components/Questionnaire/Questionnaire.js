@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Wrapper, Row, Col, } from 'reactstrap';
 import API from '../../utils/API';
+import { timingSafeEqual } from 'crypto';
 // const mongoose = require("mongoose");
 // const db = require('../../models/user')
 // const User = require('../../models/user.js');
@@ -8,6 +9,8 @@ import API from '../../utils/API';
 class Questionnaire extends React.Component {
 
 	state = {
+		username: "",
+		password: "",
 		name: "",
 		age: 0,
 		gender: "",
@@ -28,6 +31,8 @@ class Questionnaire extends React.Component {
 
 	handleFormSubmit = () => {
 		API.saveInfo({
+			username: this.state.username,
+			password: this.state.password,
 			name: this.state.name,
 			age: this.state.age,
 			gender: this.state.gender,
@@ -43,6 +48,14 @@ class Questionnaire extends React.Component {
 	render() {
 		return (
 			<Form name="roommateSurvey" id="roommateSurvey">
+				<FormGroup>
+					<Label>Username</Label>
+					<Input type="text" name="username" onChange={this.handleInputChange} />
+				</FormGroup>
+				<FormGroup>
+					<Label>Password</Label>
+					<Input type="password" name="password" onChange={this.handleInputChange} />
+				</FormGroup>
 				<FormGroup className="form-group">
 					<Label>Name</Label>
 					<small id="nameHelp" className="form-text text-muted">Lets introduce ourselves...</small>
