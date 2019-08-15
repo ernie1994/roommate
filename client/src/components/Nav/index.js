@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import Redirect from 'react-router-dom';
 
 class Nav extends React.Component {
 
@@ -7,11 +8,18 @@ class Nav extends React.Component {
 		isLoggedIn: false
 	}
 
-	componentDidMount() {
+	componentDidMount = () => {
 		axios.get('api/user').then((data)=> {
 			if(data.data.user) {
 				this.setState({isLoggedIn: true});
 			}
+		})
+	}
+
+	handleLogout = () => {
+		axios.post('api/logout').then(()=> {
+			
+			window.location='/';
 		})
 	}
 
@@ -30,7 +38,9 @@ class Nav extends React.Component {
 
 						:
 
-						""
+						<li className="nav-item">
+							<a className="nav-link" onClick={this.handleLogout}>Logout</a>
+						</li>
 					
 					}
 					<li className="nav-item">
@@ -42,6 +52,7 @@ class Nav extends React.Component {
 					<li className="nav-item">
 						<a className="nav-link" href="/questionnaire">Questionnaire</a>
 					</li>
+					
 				</ul>
 			</nav>
     	);
