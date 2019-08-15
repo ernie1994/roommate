@@ -1,5 +1,5 @@
 import Firebase from "./index";
-require("firebase/storage");
+import "firebase/storage";
 
 const Storage = Firebase.storage();
 

@@ -2,7 +2,6 @@ import React from "react";
 import { Jumbotron, Form, FormGroup, Label, Input, Col, Button, Row } from "reactstrap";
 import SearchResult from "./SearchResult";
 import API from "../utils/API";
-import Background from "../srcImages/condo2.jpg";
 import RoomDetail from "./RoomDetail";
 
 class SearchForm extends React.Component {
@@ -56,8 +55,7 @@ class SearchForm extends React.Component {
     render() {
         const styles = {
             jumbotron: {
-                backgroundImage: `url(${Background})`,
-                width: "100%",
+                backgroundColor: "black"
             },
             header: {
                 color: "white",

@@ -7,12 +7,18 @@ function Nav() {
                 Home
             </a>
             <ul className="navbar-nav">
+				<li className="nav-item">
+					<a className="nav-link" href="/login">Sign Up/Log in</a>
+				</li>
                 <li className="nav-item">
                     <a className="nav-link" href="/post">Post a Room</a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" href="/account">Account</a>
                 </li>
+				<li className="nav-item">
+					<a className="nav-link" href="/questionnaire">Questionnaire</a>
+				</li>
             </ul>
         </nav>
     );
