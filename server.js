@@ -24,6 +24,18 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
+// Send every request to the React app
+// Define any API routes before this runs
+app.get("*", function (req, res) {
+    var directory;
+    if (process.env.NODE_ENV) {
+        directory = "build";
+    } else {
+        directory = "public";
+    }
+    res.sendFile(path.join(__dirname, `./client/${directory}/index.html`));
+
+});
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/userlist");
 

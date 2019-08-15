@@ -15,7 +15,9 @@ class App extends React.Component {
     var styles = {
       container: {
         paddingLeft: "0px",
-        paddingRight: "0px"
+        paddingRight: "0px",
+        marginLeft: "0px",
+        marginRight: "0px"
       }
     };
     return (
