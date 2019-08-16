@@ -14,7 +14,7 @@ const roomSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "User" },
     images: [{ type: Schema.Types.ObjectId, ref: "Image" }],
     lat: { type: String },
-    long: { type: String }
+    lng: { type: String }
 });
 
 const Room = mongoose.model("Room", roomSchema);
