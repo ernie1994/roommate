@@ -37,6 +37,8 @@ class UserLogin extends React.Component {
 			axios.get("/api/user").then((data) => {
 				console.log("we made it bitch", data);
 			})
+		}).then(()=> {
+			window.location = '/';
 		})
 	}
 
