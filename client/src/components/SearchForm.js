@@ -108,6 +108,7 @@ class SearchForm extends React.Component {
                             <Label for="location">Location</Label>
                             <Input required onChange={this.handleChange} type="text" name="location" id="location" placeholder="Enter city, state or zip code" />
                         </Col>
+
                     </FormGroup>
                     <FormGroup row className="d-flex justify-content-center">
                         <Col xs="10" sm="8">
