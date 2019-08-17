@@ -2,6 +2,7 @@ import React from "react";
 import { Input, Col, FormGroup, Label, Form, Button, Jumbotron } from "reactstrap"
 import Storage from "../firebase/storage";
 import axios from "axios";
+import API from "../utils/API";
 import states from "../utils/states";
 
 class RoomForm extends React.Component {
@@ -16,9 +17,13 @@ class RoomForm extends React.Component {
         catAllergy: false,
         otherAllergy: false,
         gender: "mix",
-        user: this.props.user,
+        user: null,
         files: []
     };
+
+    componentDidMount() {
+        API.getCurrentUser().then(res => this.setState({ user: res.data.user }));
+    }
 
     uploadImages = (files, cb) => {
         let index = 0;
