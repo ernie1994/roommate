@@ -63,7 +63,7 @@ class UserLogin extends React.Component {
 							</FormGroup>
 							<FormText>Don't have an account with us? Sign up for one <a href="/signup">here</a></FormText>
 							<Button outline color="success" onClick={this.handleFormSubmit}>Sign In</Button>
-							<Button outline color="danger" onClick={this.test}>USER SIGN IN TEST</Button>
+							{/* <Button outline color="danger" onClick={this.test}>USER SIGN IN TEST</Button> */}
 						</Form>
 					</CardBody>
 				</Card>

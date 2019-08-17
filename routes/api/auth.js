@@ -16,23 +16,15 @@ router.get('/user', (req, res, next)=> {
 
 router.post('/user/update', (req,res)=> {
 
-	console.log('firing update funciton in auth.js');
-	console.log('=============REQ.PARAMS==================')
-	console.log(req.params);
-	console.log("============= REQ.USER ==================")
-	console.log(req.user);
-	console.log("==================REQ.BODY===================")
-	console.log(req.body);
-	// console.log(req);
-
 	db.User.findByIdAndUpdate(req.user._id, {$set: req.body}, (err,result)=> {
 		if(err){
 			console.log(error);
 		}
 		console.log('RESULT: ' + result);
 	})
-	
 
+	return;
+	
 })
 
 

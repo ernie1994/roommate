@@ -15,7 +15,13 @@ const userSchema = new Schema({
 	address: { type: String },
     state: { type: String },
     city: { type: String },
-    zip: { type: String },
+    zip: { type: Number },
+	bio: {type: String},
+	allergies: {type: String},
+	pets: {type: String},
+	drinks: {type: String},
+	smokes: {type: String},
+	upLate: {type: String}
 
 })
 
