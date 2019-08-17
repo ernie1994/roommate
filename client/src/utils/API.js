@@ -28,6 +28,11 @@ export default {
 
 	},
 
+	updateUser: function(info) {
+		return axios.post('/api/user/update', info);
+
+	},
+
 	userTest: function () {
 		return axios.get('/login');
 	}

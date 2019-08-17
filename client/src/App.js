@@ -10,6 +10,8 @@ import { Container } from "reactstrap";
 import SearchForm from "./components/SearchForm";
 import RoomForm from './components/RoomForm';
 
+import AccountView from './components/AccountView/AccountView';
+
 class App extends React.Component {
   render() {
     var styles = {
@@ -31,6 +33,7 @@ class App extends React.Component {
               <Route exact path="/login" component={UserLogin}></Route>
               <Route exact path="/signup" component={UserSignup}></Route>
               <Route exact path="/post" component={RoomForm}></Route>
+			  <Route exact path="/account" component={AccountView} />
             </Switch>
           </Router>
         </Container>
