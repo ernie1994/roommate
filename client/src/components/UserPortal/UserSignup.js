@@ -1,14 +1,15 @@
 import React from 'react';
-import {Card, CardText, CardBody, Form, FormGroup, Label, Input, FormText, Container, Wrapper, Button} from 'reactstrap';
-
+import {Card, CardBody, Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {Redirect} from 'react-router';
 
 import API from '../../utils/API';
 
 class UserSignup extends React.Component {
 
 	state = {
-		username: "this will not change",
-		password: "niether will this"
+		username: "",
+		password: "",
+		signedUp: false
 	}
 
 	handleInputChange = (event) => {
@@ -25,8 +26,13 @@ class UserSignup extends React.Component {
 		API.createUser({
 			username: this.state.username,
 			password: this.state.password
-		}).then(function(res){
-			console.log(res);
+		}).then(()=> {
+			API.loginUser({
+				username: this.state.username,
+				password: this.state.password
+			}).then(()=> {
+				this.setState({signedUp: true});
+			})
 		})
 	}
 
@@ -34,6 +40,7 @@ class UserSignup extends React.Component {
 	render() {
 		return (
 			<div>
+				{!this.state.signedUp ? 
 				<Card>
 					<CardBody>
 						<Form>
@@ -50,6 +57,12 @@ class UserSignup extends React.Component {
 						</Form>
 					</CardBody>
 				</Card>
+
+				:
+
+				<Redirect to='/questionnaire' />
+				}
+				
 			</div>
 		)
 	}

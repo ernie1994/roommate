@@ -3,6 +3,7 @@ import { Jumbotron, Form, FormGroup, Label, Input, Col, Button, Row } from "reac
 import SearchResult from "./SearchResult";
 import API from "../utils/API";
 import RoomDetail from "./RoomDetail";
+import Axios from "axios";
 
 class SearchForm extends React.Component {
 
@@ -16,6 +17,17 @@ class SearchForm extends React.Component {
         room: null
     };
 
+    getUserLocation = () => {
+        Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.location}A&key=AIzaSyBQ1_V_WrUt_H5buMATmErTV5MJp-LedFE`).then((res) => {
+
+            console.log(res.data.results[0].geometry.location.lat);
+            var lat = res.data.results[0].geometry.location.lat
+            var lng = res.data.results[0].geometry.location.lng
+
+            console.log(lat, lng)
+        })
+    }
+
     handleBack = () => {
         const newState = this.state.room ? { room: null } : { results: [] };
         this.setState(newState);
@@ -23,6 +35,8 @@ class SearchForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+
+        this.getUserLocation();
         const { location, gender, dogAllergy, catAllergy, otherAllergy } = this.state;
         const info = {
             location: location,

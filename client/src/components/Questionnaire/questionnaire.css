@@ -1,0 +1,19 @@
+
+
+body {
+	 background-color: #45add0;
+}
+
+Form {
+	border: solid 4px #dd6080;
+	border-radius: 25px;
+	background: #f2e587;
+	padding: 30px;
+	color: #343338;
+}
+
+.btn {
+	background-color: #dd6080;
+	border: #45add0
+
+}

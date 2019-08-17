@@ -1,5 +1,7 @@
 import React from 'react';
-import { Card, CardText, CardBody, Form, FormGroup, Label, Input, FormText, Container, Wrapper, Button } from 'reactstrap';
+import { Card, CardBody, Form, FormGroup, Label, Input, FormText, Button } from 'reactstrap';
+import {Redirect} from 'react-router-dom';
+
 
 
 import API from '../../utils/API';
@@ -10,7 +12,8 @@ class UserLogin extends React.Component {
 
 	state = {
 		username: "this will not change",
-		password: "niether will this"
+		password: "niether will this",
+		isLoggedIn: false
 	}
 
 	handleInputChange = (event) => {
@@ -24,12 +27,6 @@ class UserLogin extends React.Component {
 	}
 
 	handleFormSubmit = () => {
-		// API.createUser({
-		// 	username: this.state.username,
-		// 	password: this.state.password
-		// }).then(function(res){
-		// 	console.log(res);
-		// })
 		API.loginUser({
 			username: this.state.username,
 			password: this.state.password
@@ -37,6 +34,8 @@ class UserLogin extends React.Component {
 			axios.get("/api/user").then((data) => {
 				console.log("we made it bitch", data);
 			})
+		}).then(()=> {
+			this.setState({isLoggedIn: true});
 		})
 	}
 
@@ -45,7 +44,12 @@ class UserLogin extends React.Component {
 
 	render() {
 		return (
+			
 			<div>
+				{this.state.isLoggedIn ? <Redirect to='/' />
+
+					:
+				
 				<Card>
 					<CardBody>
 						<Form>
@@ -59,10 +63,11 @@ class UserLogin extends React.Component {
 							</FormGroup>
 							<FormText>Don't have an account with us? Sign up for one <a href="/signup">here</a></FormText>
 							<Button outline color="success" onClick={this.handleFormSubmit}>Sign In</Button>
-							<Button outline color="danger" onClick={this.test}>USER SIGN IN TEST</Button>
+							{/* <Button outline color="danger" onClick={this.test}>USER SIGN IN TEST</Button> */}
 						</Form>
 					</CardBody>
 				</Card>
+				}
 			</div>
 		)
 	}

@@ -1,23 +1,28 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Wrapper, Row, Col, } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container, Row, Col, } from 'reactstrap';
 import API from '../../utils/API';
-import { timingSafeEqual } from 'crypto';
-// const mongoose = require("mongoose");
-// const db = require('../../models/user')
-// const User = require('../../models/user.js');
+import { Redirect } from 'react-router';
+
+import Axios from 'axios';
+import './questionnaire.css'
 
 class Questionnaire extends React.Component {
 
 	state = {
-		username: "",
-		password: "",
 		name: "",
 		age: 0,
 		gender: "",
 		state: "",
 		city: "",
-		zip: ""
-
+		zip: "",
+		bio: "",
+		allergies: "",
+		pets: "",
+		smokes: "",
+		drinks: "",
+		upLate: "",
+		// state variable which will allow us to redirect the user to the home page once they have filled out the form
+		formSubmitted: false
 	}
 
 	handleInputChange = (event) => {
@@ -30,97 +35,136 @@ class Questionnaire extends React.Component {
 	};
 
 	handleFormSubmit = () => {
-		API.saveInfo({
-			username: this.state.username,
-			password: this.state.password,
+
+		API.updateUser({
 			name: this.state.name,
 			age: this.state.age,
 			gender: this.state.gender,
 			state: this.state.state,
 			city: this.state.city,
-			zip: this.state.zip
-		}).then(function (res) {
-			console.log(res)
+			zip: this.state.zip,
+			bio: this.state.bio,
+			allergies: this.state.allergies,
+			pets: this.state.pets,
+			drinks: this.state.drinks,
+			smokes: this.state.smokes,
+			upLate: this.state.upLate
+		})
+
+		this.setState({formSubmitted: true});
+	}
+
+	userTest = () => {
+		Axios.get('/api/user').then((response) => {
+			console.log(response);
 		})
 	}
 
 
 	render() {
 		return (
-			<Form name="roommateSurvey" id="roommateSurvey">
-				<FormGroup>
-					<Label>Username</Label>
-					<Input type="text" name="username" onChange={this.handleInputChange} />
-				</FormGroup>
-				<FormGroup>
-					<Label>Password</Label>
-					<Input type="password" name="password" onChange={this.handleInputChange} />
-				</FormGroup>
-				<FormGroup className="form-group">
-					<Label>Name</Label>
-					<small id="nameHelp" className="form-text text-muted">Lets introduce ourselves...</small>
-					<Input type="text" className="form-control" name="name" placeholder="My name is...." onChange={this.handleInputChange} />
-				</FormGroup>
-				<FormGroup className="form-group">
-					<Label>Age</Label>
-					<small id="ageHelp" className="form-text text-muted">Not to be rude, but...</small>
-					<Input type="text" className="form-control" name="age" placeholder="Well if you must know..." onChange={this.handleInputChange} />
-				</FormGroup>
-				<Label>Address</Label>
-				<Row className="form-row">
+			<div>
+				{!this.state.formSubmitted ?
+					<Container>
 
-					<Col md={7}>
-						<Input type="text" className="form-control" placeholder="State" name="state" onChange={this.handleInputChange} />
-					</Col>
-					<Col >
-						<Input type="text" className="form-control" placeholder="City" name="city" onChange={this.handleInputChange} />
-					</Col>
-					<Col >
-						<Input type="text" className="form-control" placeholder="Zipcode" name="zip" onChange={this.handleInputChange} />
-					</Col>
-				</Row>
-				<FormGroup className="form-group">
-					<Label>Gender</Label>
-					<select className="form-control" name="gender" onChange={this.handleInputChange}>
-						<option hidden></option>
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-						<option value="nonbinary">Nonbinary</option>
-						<option value="prefer not to say">Prefer not to say</option>
-					</select>
-				</FormGroup>
-				<FormGroup>
-					<legend>Additional Info</legend>
-					<small className="form-text text-muted">Lets fill in some blanks...</small>
-					<Label className="mr-5">Do you have any pet allergies?</Label>
-					
-					<FormGroup check inline>
-						<Label check>
-							<Input type="checkbox" id="allergyCheckbox1" value="Cats" />Cats
-						</Label>
-					</FormGroup>
-					<FormGroup check inline>
-						<Label check>
-							<Input type="checkbox" id="allergyCheckbox2" value="Dogs" />Dogs
-						</Label>
-					</FormGroup>
-					<FormGroup check inline>
-						<Label check>
-							<Input type="checkbox" id="allergyCheckbox3" value="Other" />Other
-						</Label>
-					</FormGroup>
-					<FormGroup check inline>
-						<Label check>
-							<Input type="checkbox" id="allergyCheckbox4" value="No allergies" />No allergies
-						</Label>
-					</FormGroup>
-				</FormGroup>
-				<FormGroup>
-					<Label for="bio">Tell us a little bit about yourself</Label>
-					<Input type="textarea" name="bioField" id="bio" />
-				</FormGroup>
-				<Button outline color="success" onClick={this.handleFormSubmit}>Submit Form</Button>
-			</Form>
+						<Form name="roommateSurvey" id="roommateSurvey">
+
+							<FormGroup className="form-group">
+								<Label>Name</Label>
+								<small id="nameHelp" className="form-text text-muted">Lets introduce ourselves...</small>
+								<Input type="text" className="form-control" name="name" placeholder="My name is...." onChange={this.handleInputChange} />
+							</FormGroup>
+							<FormGroup className="form-group">
+								<Label>Age</Label>
+								<small id="ageHelp" className="form-text text-muted">Not to be rude, but...</small>
+								<Input type="text" className="form-control" name="age" placeholder="Well if you must know..." onChange={this.handleInputChange} />
+							</FormGroup>
+							<Label>Address</Label>
+							<Row className="form-row">
+
+								<Col md={7}>
+									<Input type="text" className="form-control" placeholder="State" name="state" onChange={this.handleInputChange} />
+								</Col>
+								<Col >
+									<Input type="text" className="form-control" placeholder="City" name="city" onChange={this.handleInputChange} />
+								</Col>
+								<Col >
+									<Input type="text" className="form-control" placeholder="Zipcode" name="zip" onChange={this.handleInputChange} />
+								</Col>
+							</Row>
+							<FormGroup className="form-group">
+								<Label>Gender</Label>
+								<select className="form-control" name="gender" onChange={this.handleInputChange}>
+									<option hidden></option>
+									<option value="male">Male</option>
+									<option value="female">Female</option>
+									<option value="nonbinary">Nonbinary</option>
+									<option value="prefer not to say">Prefer not to say</option>
+								</select>
+							</FormGroup>
+							<FormGroup>
+								<Label for="bio">Tell us a little bit about yourself</Label>
+								<Input type="textarea" name="bio" id="bio" onChange={this.handleInputChange} />
+							</FormGroup>
+							<FormGroup>
+								<legend>Additional Info</legend>
+								<small className="form-text text-muted">Lets fill in some blanks...</small>
+
+								<Label className="mr-5">Do you have any pet allergies?</Label>
+								<select className="form-control mbd-select colorful-select" name="allergies" onChange={this.handleInputChange} >
+									<option hidden />
+									<option value="cats">Cats</option>
+									<option value="dogs">Dogs</option>
+									<option value="other">Other</option>
+									<option value="none">No allergies</option>
+								</select>
+
+
+								<Label className='mr-5'>Do you own any pets?</Label>
+								<select className="form-control mbd-select colorful-select" name="pets" onChange={this.handleInputChange}>
+									<option hidden />
+									<option value="cats">Cat/ Cats</option>
+									<option value="dogs">Dog/ Dogs</option>
+									<option value="other">Other</option>
+									<option value="none">No pets</option>
+								</select>
+
+								<Label className='mr-5'>Do you drink?</Label>
+								<select className="form-control mbd-select colorful-select" name="drinks" onChange={this.handleInputChange}>
+									<option hidden />
+									<option value="does drink">Yes</option>
+									<option value="doesnt drink">No</option>
+									<option value="sometimes drinks">Sometimes</option>
+								</select>
+
+								<Label className='mr-5'>Do you smoke?</Label>
+								<select className="form-control mbd-select colorful-select" name="smokes" onChange={this.handleInputChange}>
+									<option hidden />
+									<option value="does smoke">Yes</option>
+									<option value="doesnt smoke">No</option>
+									<option value="sometimes smokes">Sometimes</option>
+								</select>
+
+								<Label className='mr-5'>Are you often up late (Past 1 AM)?</Label>
+								<select className="form-control mbd-select colorful-select" name="upLate" onChange={this.handleInputChange}>
+									<option hidden />
+									<option value="never">Never</option>
+									<option value="almost never">Almost never</option>
+									<option value="sometimes">Sometimes</option>
+									<option value="most of the time">Most of the time</option>
+									<option value="all the time">All the time</option>
+								</select>
+							</FormGroup>
+							<Button onClick={this.handleFormSubmit}>Submit Form</Button>
+						</Form>
+					</Container>
+
+					:
+
+					<Redirect to='/' />
+				}
+			</div>
+
 		)
 	}
 }
