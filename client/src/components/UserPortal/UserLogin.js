@@ -46,7 +46,7 @@ class UserLogin extends React.Component {
 		return (
 			
 			<div>
-				{this.state.isLoggedIn ? <Redirect to='/' />
+				{this.state.isLoggedIn ? <Redirect to='/account' />
 
 					:
 				
@@ -62,7 +62,7 @@ class UserLogin extends React.Component {
 								<Input type="password" name="password" onChange={this.handleInputChange} />
 							</FormGroup>
 							<FormText>Don't have an account with us? Sign up for one <a href="/signup">here</a></FormText>
-							<Button outline color="success" onClick={this.handleFormSubmit}>Sign In</Button>
+							<Button onClick={this.handleFormSubmit}>Sign In</Button>
 							{/* <Button outline color="danger" onClick={this.test}>USER SIGN IN TEST</Button> */}
 						</Form>
 					</CardBody>

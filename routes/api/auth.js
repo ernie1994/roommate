@@ -14,6 +14,7 @@ router.get('/user', (req, res, next)=> {
     }
 })
 
+// The route that updates the user model when they fill out the questionnaire
 router.post('/user/update', (req,res)=> {
 
 	db.User.findByIdAndUpdate(req.user._id, {$set: req.body}, (err,result)=> {

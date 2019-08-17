@@ -46,9 +46,9 @@ class Nav extends React.Component {
 					<li className="nav-item">
 						<a className="nav-link" href="/post">Post a Room</a>
 					</li>
-					<li className="nav-item">
+					{/* <li className="nav-item">
 						<a className="nav-link" href="/account">Account</a>
-					</li>
+					</li> */}
 					{/* <li className="nav-item">
 						<a className="nav-link" href="/questionnaire">Questionnaire</a>
 					</li> */}
