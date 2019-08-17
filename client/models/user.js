@@ -9,6 +9,19 @@ const userSchema = new Schema({
 
 	username: { type: String },
 	password: { type: String },
+	name: {type: String},
+	age: {type: Number},
+	gender: {type: String},
+	address: { type: String },
+    state: { type: String },
+    city: { type: String },
+    zip: { type: Number },
+	bio: {type: String},
+	allergies: {type: String},
+	pets: {type: String},
+	drinks: {type: String},
+	smokes: {type: String},
+	upLate: {type: String}
 
 })
 
