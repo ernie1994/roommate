@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, Col, FormGroup, Label, Form, Button, Jumbotron } from "reactstrap"
 import Storage from "../firebase/storage";
-import axios from "axios";
+import Axios from "axios";
 import states from "../utils/states";
 
 class RoomForm extends React.Component {
@@ -17,7 +17,10 @@ class RoomForm extends React.Component {
         otherAllergy: false,
         gender: "mix",
         user: this.props.user,
-        files: []
+        files: [],
+        lat: "",
+        lng: ""
+
     };
 
     uploadImages = (files, cb) => {
@@ -52,22 +55,41 @@ class RoomForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address} ${this.city} ${this.state} ${this.zip}&key=AIzaSyBQ1_V_WrUt_H5buMATmErTV5MJp-LedFE`).then((res) => {
 
-        this.uploadImages(this.state.files, arr => {
-            axios
-                .post("/api/rooms",
-                    {
-                        ...this.state,
-                        urls: arr
-                    }
-                ).then(_res => {
-                    //this code should change.
-                    //user should probably go to a detail page of the room???
-                    if (window.confirm("Your room was successfully posted")) {
-                        window.location.reload();
-                    }
-                });
-        });
+            console.log(res.data.results[0].geometry.location.lat);
+            var lat = res.data.results[0].geometry.location.lat
+            var lng = res.data.results[0].geometry.location.lng
+
+            console.log(lat, lng)
+
+            this.setState(
+                {
+                    lat: lat,
+                    lng: lng
+                },
+                // fires after we set the state
+                () => {
+
+                    this.uploadImages(this.state.files, arr => {
+                        Axios
+                            .post("/api/rooms",
+                                {
+                                    ...this.state,
+                                    urls: arr
+                                }
+                            ).then(_res => {
+                                //this code should change.
+                                //user should probably go to a detail page of the room???
+                                if (window.confirm("Your room was successfully posted")) {
+                                    // window.location.reload()
+                                    console.log(_res);
+                                }
+                            });
+                    });
+                })
+        })
+
     };
 
     handleChange = event => {
@@ -91,7 +113,8 @@ class RoomForm extends React.Component {
                 break;
         }
 
-        this.setState({ [name]: value });
+        this.setState({ [name]: value }, () => console.log(this.state));
+        return false;
     };
 
     render() {
@@ -118,12 +141,14 @@ class RoomForm extends React.Component {
                             <Input required onChange={this.handleChange} type="text" name="address" id="address" placeholder="Enter address" />
                         </Col>
                     </FormGroup>
+
                     <FormGroup row className="d-flex justify-content-center">
                         <Col xs="10" sm="8">
                             <Label for="city">City</Label>
                             <Input required onChange={this.handleChange} type="text" name="city" id="city" placeholder="Enter city or town" />
                         </Col>
                     </FormGroup>
+
                     <FormGroup row className="d-flex justify-content-center">
                         <Col xs="10" sm="8">
                             <Label for="state">State</Label>
