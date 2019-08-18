@@ -4,7 +4,7 @@ const passport = require("../../passport");
 
 
 
-router.get('/user', (req, res, next)=> {
+router.get('/user', (req, res, next) => {
 
     if (req.body) {
         return res.json({ user: req.user })
@@ -14,17 +14,18 @@ router.get('/user', (req, res, next)=> {
     }
 })
 
-router.post('/user/update', (req,res)=> {
+router.post('/user/update', (req, res) => {
+    console.log(req.user);
 
-	db.User.findByIdAndUpdate(req.user._id, {$set: req.body}, (err,result)=> {
-		if(err){
-			console.log(error);
-		}
-		console.log('RESULT: ' + result);
-	})
+    db.User.findByIdAndUpdate(req.user._id, { $set: req.body }, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log('RESULT: ' + result);
+    })
 
-	return;
-	
+    return;
+
 })
 
 
@@ -33,7 +34,7 @@ router.post('/login',
         next()
     },
     passport.authenticate('local'),
-    (req, res)=> {
+    (req, res) => {
         const user = JSON.parse(JSON.stringify(req.user)) // hack
         const cleanUser = Object.assign({}, user)
         if (cleanUser) {
@@ -45,7 +46,7 @@ router.post('/login',
 
 
 
-router.post('/logout', (req, res)=> {
+router.post('/logout', (req, res) => {
     if (req.user) {
         req.session.destroy()
         res.clearCookie('connect.sid') // clean up!
@@ -53,11 +54,11 @@ router.post('/logout', (req, res)=> {
     } else {
         return res.json({ msg: 'no user to log out!' })
     }
-}) 
+})
 
 
 
-router.post('/signup', (req, res)=> {
+router.post('/signup', (req, res) => {
     const { username, password } = req.body
 
     // res.json("test");

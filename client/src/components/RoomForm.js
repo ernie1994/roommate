@@ -61,11 +61,11 @@ class RoomForm extends React.Component {
         event.preventDefault();
         Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address} ${this.city} ${this.state} ${this.zip}&key=AIzaSyBQ1_V_WrUt_H5buMATmErTV5MJp-LedFE`).then((res) => {
 
-            console.log(res.data.results[0].geometry.location.lat);
-            var lat = res.data.results[0].geometry.location.lat
-            var lng = res.data.results[0].geometry.location.lng
+            if (res.data.results[0]) {
+                var lat = res.data.results[0].geometry.location.lat;
+                var lng = res.data.results[0].geometry.location.lng;
+            }
 
-            console.log(lat, lng)
 
             this.setState(
                 {

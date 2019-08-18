@@ -11,6 +11,7 @@ import SearchForm from "./components/SearchForm";
 import RoomForm from './components/RoomForm';
 
 import AccountView from './components/AccountView/AccountView';
+import RoomDetail from './components/RoomDetail';
 
 class App extends React.Component {
   render() {
@@ -22,6 +23,7 @@ class App extends React.Component {
         marginRight: "0px"
       }
     };
+
     return (
       <>
         <Nav />
@@ -33,7 +35,7 @@ class App extends React.Component {
               <Route exact path="/login" component={UserLogin}></Route>
               <Route exact path="/signup" component={UserSignup}></Route>
               <Route exact path="/post" component={RoomForm}></Route>
-			  <Route exact path="/account" component={AccountView} />
+              <Route exact path="/account" component={AccountView} />
             </Switch>
           </Router>
         </Container>
