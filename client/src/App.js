@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import Questionnaire from './components/Questionnaire/Questionnaire';
 import UserLogin from './components/UserPortal/UserLogin';
@@ -37,6 +37,7 @@ class App extends React.Component {
               <Route exact path="/post" component={RoomForm}></Route>
               <Route exact path="/account" component={AccountView} />
               <Route exact path="/room" component={RoomDetail} />
+              <Redirect to="/" />
             </Switch>
           </Router>
         </Container>
