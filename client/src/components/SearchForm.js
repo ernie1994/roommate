@@ -20,12 +20,12 @@ class SearchForm extends React.Component {
     getUserLocation = () => {
         Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.location}A&key=AIzaSyBQ1_V_WrUt_H5buMATmErTV5MJp-LedFE`).then((res) => {
 
-            console.log(res.data.results[0].geometry.location.lat);
-            var lat = res.data.results[0].geometry.location.lat
-            var lng = res.data.results[0].geometry.location.lng
-
-            console.log(lat, lng)
-        })
+            const result = res.data.results[0];
+            if (result) {
+                const lat = result.geometry.location.lat;
+                const lng = result.geometry.location.lng;
+            }
+        });
     }
 
     handleBack = () => {
