@@ -36,6 +36,7 @@ class App extends React.Component {
               <Route exact path="/signup" component={UserSignup}></Route>
               <Route exact path="/post" component={RoomForm}></Route>
               <Route exact path="/account" component={AccountView} />
+              <Route exact path="/room" component={RoomDetail} />
             </Switch>
           </Router>
         </Container>

@@ -22,7 +22,7 @@ class User extends React.Component {
         const user = this.props.user;
 
         return (
-            <Row className="d-flex justify-content-center">
+            <Row className="d-flex justify-content-center mt-3">
                 <Col sm="6" md="5" className="d-flex justify-content-center">
                     <img
                         style={styles.profilePic}

@@ -1,11 +1,20 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 import ImageGrid from "./ImageGrid";
 import User from "./User";
 
 class RoomDetail extends React.Component {
     render() {
-        const room = this.props.room;
+
+        let room = this.props.room;
+
+        if (this.props.location && this.props.location.state) room = this.props.location.state.room;
+
+        if (!room) return (<Redirect to="/" />);
+
+        const user = room.user;
+        const images = room.images;
 
         const styles = {
             list: {
@@ -18,7 +27,7 @@ class RoomDetail extends React.Component {
 
         return (
             <>
-                <User user={this.props.room.user} />
+                <User user={user} />
                 <Row className="my-3-3 d-flex justify-content-center">
                     <Col xs="12" className="d-flex justify-content-center">
                         <div>
@@ -55,7 +64,7 @@ class RoomDetail extends React.Component {
                         </ul>
                     </Col>
                 </Row>
-                <ImageGrid images={this.props.room.images}></ImageGrid>
+                <ImageGrid images={images}></ImageGrid>
             </>
         );
     }

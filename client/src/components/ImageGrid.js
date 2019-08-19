@@ -4,7 +4,7 @@ import { Col, Row } from "reactstrap";
 class ImageGrid extends React.Component {
     render() {
         return (
-            <Row className="d-flex justify-content-center">
+            <Row className="d-flex justify-content-center mb-5">
                 {
                     this.props.images.map(image => {
                         return (
