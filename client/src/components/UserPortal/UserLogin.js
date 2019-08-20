@@ -15,11 +15,11 @@ class UserLogin extends React.Component {
 		
 	}
 
-	state = {
-		username: "",
-		password: "",
-		isLoggedIn: false
-	}
+	// state = {
+	// 	username: "",
+	// 	password: "",
+	// 	UserLoggedIn: false
+	// }
 
 	// handleInputChange = (event) => {
 	// 	let name = event.target.name;
@@ -44,23 +44,34 @@ class UserLogin extends React.Component {
 	// 	})
 	// }
 
-	updateState = () => {
-		console.log("firing this stupid ass callback function")
-		let currentStatus = this.props.isLoggedIn;
-		console.log(currentStatus)
-		this.setState({isLoggedIn: this.props.isLoggedIn});
-	}
+	// shouldComponentUpdate = (props) => {
+	// 	return this.state.UserLoggedIn != props.isLoggedIn
+	// }
+
+	// componentDidUpdate = (props) => {
+	// 	this.setState({UserLoggedIn: props.isLoggedIn});
+	// }
+
+	
+
+	// updateState = () => {
+	// 	console.log("firing this stupid ass callback function")
+	// 	let currentStatus = this.props.isLoggedIn;
+	// 	console.log(currentStatus)	
+	// 	this.setState({isLoggedIn: this.props.isLoggedIn});
+	// }
 
 	render() {
 		return (
 			
 			<div>
-				{this.props.isLoggedIn ? <Redirect to='/account' />
+				{this.props.test ? <Redirect to='/account' />
 
 					:
 				
 				<Card>
 					<CardBody>
+						<h1>{this.props.test}!</h1>
 						<Form>
 							<FormGroup>
 								<Label>Username</Label>
@@ -71,7 +82,7 @@ class UserLogin extends React.Component {
 								<Input type="password" name="password" onChange={this.props.handleInputChange} />
 							</FormGroup>
 							<FormText>Don't have an account with us? Sign up for one <a href="/signup">here</a></FormText>
-							<Button onClick={()=> this.props.handleClick(this.updateState)}>Sign In</Button>
+							<Button onClick={()=> this.props.handleClick()}>Sign In</Button>
 							{/* <Button outline color="danger" onClick={this.test}>USER SIGN IN TEST</Button> */}
 						</Form>
 					</CardBody>

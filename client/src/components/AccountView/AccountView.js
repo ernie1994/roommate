@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router';
+// import { Redirect } from 'react-router';
 import { Row, Col, Container, Card, CardText, CardImg, CardHeader, Button, Wrapper } from 'reactstrap';
 import Axios from 'axios';
 import './accountView.css';

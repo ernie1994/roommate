@@ -41,14 +41,12 @@ class App extends React.Component {
 	}
 
 
-	loginUser = (cb) => {
+	loginUser = () => {
 		API.loginUser({
 			username: this.state.username,
 			password: this.state.password
 		}).then((result)=> {
 			this.setState({isloggedIn: true, currentUser: result.data.user})
-		}).then(()=>{
-			cb();
 		})
 
 	}
@@ -66,14 +64,18 @@ class App extends React.Component {
 		};
 		return (
 			<>
-				<Nav />
+				
 				<Container fluid style={styles.container}>
+					<Nav />
 					<Router>
+						
 						<Switch>
 							<Route exact path="/" component={SearchForm}></Route>
 							<Route exact path="/questionnaire" component={Questionnaire}></Route>
 							{/* <Route exact path="/login" component={UserLogin}></Route> */}
-							<Route exact path="/login" render={(props)=> <UserLogin handleClick={this.loginUser} handleInputChange={this.handleInputChange} isloggedIn={this.state.isloggedIn} />}/>
+
+							<Route exact path="/login" render={(props)=> <UserLogin handleClick={this.loginUser} handleInputChange={this.handleInputChange} test={this.state.isloggedIn ? true : false} />}/>
+							
 							<Route exact path="/signup" component={UserSignup}></Route>
 							<Route exact path="/post" component={RoomForm}></Route>
 							<Route exact path="/account" component={AccountView} />
