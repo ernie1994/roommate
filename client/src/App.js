@@ -17,41 +17,42 @@ import API from './utils/API';
 
 class App extends React.Component {
 
-	// TODO: Centralize isloggedin, isSignedUp, etc into App.js, and pass those to the other components as props, instead of handling all that in the individual components
-
-	// Do this by passing functions to child components as props, to allow the child components to change the state of App.js
-
 	state = {
 		isloggedIn: false,
 		isSignedUp: false,
 		username: "",
 		password: "",
-		currentUser: {}
-		
+		currentUser: {}	
 	}
 
-	handleInputChange = (event) => {
+	handleInputChange = (event)=> {
 		let name = event.target.name;
 		const value = event.target.value;
 
 		this.setState({
 			[name]: value
 		});
-
 	}
 
-
-	loginUser = () => {
+	loginUser = ()=> {
 		API.loginUser({
 			username: this.state.username,
 			password: this.state.password
 		}).then((result)=> {
 			this.setState({isloggedIn: true, currentUser: result.data.user})
 		})
-
 	}
-	
 
+	updateUser = (newUser)=> {
+		API.updateUser({newUser}).then((res)=> {
+			console.log(res);
+		})
+	}
+	logoutUser = ()=> {
+		axios.post('api/logout').then(()=> {
+			this.setState({isLoggedIn: false});
+		})
+	}
 
 	render() {
 		var styles = {
@@ -64,21 +65,16 @@ class App extends React.Component {
 		};
 		return (
 			<>
-				
 				<Container fluid style={styles.container}>
-					<Nav />
 					<Router>
-						
+						<Nav userStatus={this.state.isloggedIn ? true : false} />
 						<Switch>
 							<Route exact path="/" component={SearchForm}></Route>
-							<Route exact path="/questionnaire" component={Questionnaire}></Route>
-							{/* <Route exact path="/login" component={UserLogin}></Route> */}
-
-							<Route exact path="/login" render={(props)=> <UserLogin handleClick={this.loginUser} handleInputChange={this.handleInputChange} test={this.state.isloggedIn ? true : false} />}/>
-							
+							<Route exact path="/questionnaire" component={(props)=> <Questionnaire handleFormSubmit={this.updateUser} />}/>
+							<Route exact path="/login" render={(props)=> <UserLogin handleClick={this.loginUser} handleInputChange={this.handleInputChange} userStatus={this.state.isloggedIn ? true : false} />}/>					
 							<Route exact path="/signup" component={UserSignup}></Route>
 							<Route exact path="/post" component={RoomForm}></Route>
-							<Route exact path="/account" component={AccountView} />
+							<Route exact path="/account" component={(props)=> <AccountView user={this.state.currentUser}/>} />
 						</Switch>
 					</Router>
 				</Container>

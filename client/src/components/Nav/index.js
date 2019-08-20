@@ -1,71 +1,40 @@
 import React from "react";
-import axios from 'axios';
-// import Redirect from 'react-router-dom';
-import {Link} from 'react-router-dom';
-// import {Redirect} from 'react-router';
-// 
-class Nav extends React.Component {
+import {Nav, NavItem, NavLink} from 'reactstrap';
 
-	state = {
-		isLoggedIn: false
-	}
+class NavBar extends React.Component {
 
-	componentWillMount = () => {
-		console.log("navbar mounting")
-		axios.get('api/user').then((data)=> {
-			if(data.data.user) {
-				this.setState({isLoggedIn: true});
-			}
-		})
-	}
-
-	handleLogout = () => {
-		axios.post('api/logout').then(()=> {
-			
-			this.setState({isLoggedIn: false});
-		})
+	constructor(props){
+		super(props);
 	}
 
 	render() {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-				<a className="navbar-brand" href="/">
+			<Nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+				<NavLink className="navbar-brand" href="/">
 					Home
-				</a>
-				<ul className="navbar-nav">
-					{!this.state.isLoggedIn ? 
-
-						<li className="nav-item">
-							<a className="nav-link" href="/login">Sign Up/Log in</a>
-							{/* <Link to="/login">Sign Uo / Login</Link> */}
-						</li>
-
+				</NavLink>			
+					{!this.props.userStatus ?
+						<NavItem className="Nav-item">						
+							<NavLink href="/login">Sign Uo / Login</NavLink>
+						</NavItem>
 						:
-
-						<li className="nav-item">
-							<a className="nav-link" onClick={this.handleLogout} href="/">Logout</a>
-							{/* <Link to="/" onClick={this.handleLogout}>Logout</Link> */}
-						</li>
-					
+						<NavItem className="Nav-item">						
+							<NavLink href="/" onClick={this.handleLogout}> Logout </NavLink>
+						</NavItem>				
 					}
-					<li className="nav-item">
-						<a className="nav-link" href="/post">Post a Room</a>
-						{/* <Link to="/post">Post a Room</Link> */}
-					</li>
-					<li className="nav-item">
-						<a className="nav-link" href="/account">Account</a>
-						{/* <Link to="/account">Account</Link> */}
-					</li> 
-					 <li className="nav-item">
-						<a className="nav-link" href="/questionnaire">Questionnaire</a>
-						{/* <Link to="/questionnaire">Questionnaire</Link> */}
-					</li> 
-					
-				</ul>
-			</nav>
+					<NavItem className="Nav-item">						
+						<NavLink href="/post"> Post NavLink Room</NavLink>
+					</NavItem>
+					<NavItem className="Nav-item">						
+						<NavLink href="/account"> Account</NavLink>
+					</NavItem> 
+					 <NavItem className="Nav-item">					
+						<NavLink href="/questionnaire"> Questionnaire</NavLink>
+					</NavItem> 
+			</Nav>
     	);
 	}
     
 }
 
-export default Nav;
+export default NavBar;

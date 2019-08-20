@@ -36,7 +36,7 @@ class Questionnaire extends React.Component {
 	};
 
 	handleFormSubmit = () => {
-
+		console.log(this.state);
 		API.updateUser({
 			name: this.state.name,
 			age: this.state.age,
