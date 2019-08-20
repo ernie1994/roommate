@@ -15,7 +15,7 @@ class SearchForm extends React.Component {
         otherAllergy: false,
         results: [],
         room: null,
-        range: 0,
+        range: 3000,
         lat: 0,
         lng: 0,
     };

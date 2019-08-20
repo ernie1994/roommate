@@ -54,24 +54,39 @@ module.exports = {
             // console.log(req.query)
 
 
-            const arr = [];
+            // const arr = [];
 
-            const locationWords = req.query.location.split(new RegExp(" |,"));
+            // const locationWords = req.query.location.split(new RegExp(" |,"));
 
-            locationWords.forEach(word => {
-                arr.push({ address: { $regex: `${word}`, $options: 'i' } });
-                arr.push({ city: { $regex: `${word}`, $options: 'i' } });
-                arr.push({ state: { $regex: `${word}`, $options: 'i' } });
-                arr.push({ zip: { $regex: `${word}`, $options: 'i' } });
-            });
+            // locationWords.forEach(word => {
+            //     arr.push({ address: { $regex: `${word}`, $options: 'i' } });
+            //     arr.push({ city: { $regex: `${word}`, $options: 'i' } });
+            //     arr.push({ state: { $regex: `${word}`, $options: 'i' } });
+            //     arr.push({ zip: { $regex: `${word}`, $options: 'i' } });
+            // });
 
 
-            query["$or"] = arr;
+            // query["$or"] = arr;
         }
 
         db.Room.find(query).populate("user").populate("images")
             .then(data => {
 
+                let filteredData = data.filter(roomPost => {
+                    if (roomPost.lat && roomPost.lng) {
+                        const isInRadius = isPointWithinRadius(
+                            { latitude: req.query.lat, longitude: req.query.lng },
+                            { latitude: roomPost.lat, longitude: roomPost.lng },
+                            req.query.range * 1.6 * 1000
+                        );
+                        console.log(isInRadius);
+                        console.log(roomPost.lat, roomPost.lng, roomPost.city);
+                        return isInRadius;
+                    }
+
+                    return false;
+                });
+                //console.log(filteredData);
                 // let filteredData = data.filter(roomPost => {
                 //     const testResult = isPointWithinRadius(
                 //         { latitude: req.query.lat, longitude: req.query.lng },
@@ -83,7 +98,7 @@ module.exports = {
                 // }
                 // );
                 //console.log(filteredData);
-                return res.json(data)
+                return res.json(filteredData)
             })
             .catch(err => res.status(422).json(err))
     },
