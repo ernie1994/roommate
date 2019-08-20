@@ -15,7 +15,7 @@ class SearchForm extends React.Component {
         otherAllergy: false,
         results: [],
         room: null,
-        range: 0,
+        range: 3000,
         lat: 0,
         lng: 0,
     };
@@ -23,11 +23,11 @@ class SearchForm extends React.Component {
     getUserLocation = () => {
         return Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.location}A&key=AIzaSyBQ1_V_WrUt_H5buMATmErTV5MJp-LedFE`).then((res) => {
 
-            console.log(res.data.results[0].geometry.location.lat);
+            // console.log(res.data.results[0].geometry.location.lat);
             var lat = res.data.results[0].geometry.location.lat
             var lng = res.data.results[0].geometry.location.lng
 
-            console.log(lat, lng)
+            // console.log(lat, lng)
             return { lat: lat, lng: lng };
         })
     }
