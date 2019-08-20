@@ -7,8 +7,6 @@ module.exports = {
 
         let roomId;
 
-        console.log("route hit\n\n\n\n\n\n\n\n");
-
         db.Room.create(req.body)
             .then(room => {
                 roomId = room._id;
@@ -24,12 +22,12 @@ module.exports = {
                 db.Room.findOneAndUpdate(
                     { _id: roomId },
                     { $push: { images: { $each: ids } } },
-                    { new: true },
-                    (err, room) => {
-                        if (err) throw err;
+                    { new: true })
+                    .populate("user")
+                    .populate("images")
+                    .then(room => {
                         res.json(room);
-                    }
-                );
+                    });
             })
             .catch(err => res.status(422).json(err));
 
