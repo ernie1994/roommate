@@ -1,3 +1,5 @@
+const { isPointWithinRadius } = require('geolib');
+
 const db = require('../models');
 
 module.exports = {
@@ -40,6 +42,7 @@ module.exports = {
     getSome: function (req, res) {
 
         var query = {};
+        //console.log(req.query)
 
         if (req.query.gender) query.gender = req.query.gender;
 
@@ -49,8 +52,9 @@ module.exports = {
 
         if (req.query.otherAllergy === "true") query.otherAllergy = false;
 
-
         if (req.query.location) {
+            // console.log(req.query)
+
 
             const arr = [];
 
@@ -68,7 +72,21 @@ module.exports = {
         }
 
         db.Room.find(query).populate("user").populate("images")
-            .then(data => res.json(data))
+            .then(data => {
+
+                // let filteredData = data.filter(roomPost => {
+                //     const testResult = isPointWithinRadius(
+                //         { latitude: req.query.lat, longitude: req.query.lng },
+                //         { latitude: roomPost.lat, longitude: roomPost.lng },
+                //         req.query.range
+                //     );
+                //     console.log(testResult);
+                //     return true;
+                // }
+                // );
+                //console.log(filteredData);
+                return res.json(data)
+            })
             .catch(err => res.status(422).json(err))
     },
     deleteAll: function (_req, res) {

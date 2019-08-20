@@ -14,17 +14,21 @@ class SearchForm extends React.Component {
         catAllergy: false,
         otherAllergy: false,
         results: [],
-        room: null
+        room: null,
+        range: 0,
+        lat: 0,
+        lng: 0,
     };
 
     getUserLocation = () => {
-        Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.location}A&key=AIzaSyBQ1_V_WrUt_H5buMATmErTV5MJp-LedFE`).then((res) => {
+        return Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.location}A&key=AIzaSyBQ1_V_WrUt_H5buMATmErTV5MJp-LedFE`).then((res) => {
 
             console.log(res.data.results[0].geometry.location.lat);
             var lat = res.data.results[0].geometry.location.lat
             var lng = res.data.results[0].geometry.location.lng
 
             console.log(lat, lng)
+            return { lat: lat, lng: lng };
         })
     }
 
@@ -36,20 +40,26 @@ class SearchForm extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        this.getUserLocation();
-        const { location, gender, dogAllergy, catAllergy, otherAllergy } = this.state;
-        const info = {
-            location: location,
-            gender: gender,
-            dogAllergy: dogAllergy,
-            catAllergy: catAllergy,
-            otherAllergy: otherAllergy
-        };
-        API.findRooms(info)
-            .then(res => {
-                var data = res.data ? res.data : [];
-                this.setState({ results: data })
-            });
+        this.getUserLocation().then(loc => {
+            const { location, gender, dogAllergy, catAllergy, otherAllergy, range, lat, lng } = this.state;
+            const info = {
+                location: location,
+                gender: gender,
+                dogAllergy: dogAllergy,
+                catAllergy: catAllergy,
+                otherAllergy: otherAllergy,
+                range: range,
+                lat: loc.lat,
+                lng: loc.lng
+            };
+            console.log(info);
+            API.findRooms(info)
+                .then(res => {
+                    var data = res.data ? res.data : [];
+                    this.setState({ results: data })
+                });
+        });
+
     };
 
     handleChange = event => {
@@ -108,8 +118,23 @@ class SearchForm extends React.Component {
                             <Label for="location">Location</Label>
                             <Input required onChange={this.handleChange} type="text" name="location" id="location" placeholder="Enter city, state or zip code" />
                         </Col>
-
                     </FormGroup>
+
+                    <FormGroup row className="d-flex justify-content-center">
+                        <Col xs="10" sm="8">
+                            <Label for="Range">Distance Range</Label>
+                            <Input onChange={this.handleChange} type="select" name="range" id="gender">
+                                <option value="">Show All</option>
+                                <option value={5}>5</option>
+                                <option value={10}>10</option>
+                                <option value={15}>15</option>
+                                <option value={20}>20</option>
+                                <option value={25}>25</option>
+
+                            </Input>
+                        </Col>
+                    </FormGroup>
+
                     <FormGroup row className="d-flex justify-content-center">
                         <Col xs="10" sm="8">
                             <Label for="gender">Gender Preference</Label>
