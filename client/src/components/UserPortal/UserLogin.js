@@ -44,10 +44,12 @@ class UserLogin extends React.Component {
 	// 	})
 	// }
 
-	
-	
-
-
+	updateState = () => {
+		console.log("firing this stupid ass callback function")
+		let currentStatus = this.props.isLoggedIn;
+		console.log(currentStatus)
+		this.setState({isLoggedIn: this.props.isLoggedIn});
+	}
 
 	render() {
 		return (
@@ -69,7 +71,7 @@ class UserLogin extends React.Component {
 								<Input type="password" name="password" onChange={this.props.handleInputChange} />
 							</FormGroup>
 							<FormText>Don't have an account with us? Sign up for one <a href="/signup">here</a></FormText>
-							<Button onClick={()=> this.props.handleClick()}>Sign In</Button>
+							<Button onClick={()=> this.props.handleClick(this.updateState)}>Sign In</Button>
 							{/* <Button outline color="danger" onClick={this.test}>USER SIGN IN TEST</Button> */}
 						</Form>
 					</CardBody>

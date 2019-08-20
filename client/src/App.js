@@ -41,13 +41,16 @@ class App extends React.Component {
 	}
 
 
-	loginUser = () => {
+	loginUser = (cb) => {
 		API.loginUser({
 			username: this.state.username,
 			password: this.state.password
 		}).then((result)=> {
 			this.setState({isloggedIn: true, currentUser: result.data.user})
+		}).then(()=>{
+			cb();
 		})
+
 	}
 	
 
