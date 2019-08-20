@@ -21,6 +21,7 @@ class Questionnaire extends React.Component {
 		smokes: "",
 		drinks: "",
 		upLate: "",
+		hobbies: "",
 		// state variable which will allow us to redirect the user to the home page once they have filled out the form
 		formSubmitted: false
 	}
@@ -48,7 +49,8 @@ class Questionnaire extends React.Component {
 			pets: this.state.pets,
 			drinks: this.state.drinks,
 			smokes: this.state.smokes,
-			upLate: this.state.upLate
+			upLate: this.state.upLate,
+			hobbies: this.state.hobbies
 		})
 
 		this.setState({formSubmitted: true});

@@ -8,7 +8,8 @@ class Nav extends React.Component {
 		isLoggedIn: false
 	}
 
-	componentDidMount = () => {
+	componentWillMount = () => {
+		console.log("navbar mounting")
 		axios.get('api/user').then((data)=> {
 			if(data.data.user) {
 				this.setState({isLoggedIn: true});
@@ -39,19 +40,19 @@ class Nav extends React.Component {
 						:
 
 						<li className="nav-item">
-							<a className="nav-link" onClick={this.handleLogout} href="*">Logout</a>
+							<a className="nav-link" onClick={this.handleLogout} href="/">Logout</a>
 						</li>
 					
 					}
 					<li className="nav-item">
 						<a className="nav-link" href="/post">Post a Room</a>
 					</li>
-					{/* <li className="nav-item">
+					<li className="nav-item">
 						<a className="nav-link" href="/account">Account</a>
-					</li> */}
-					{/* <li className="nav-item">
+					</li> 
+					 <li className="nav-item">
 						<a className="nav-link" href="/questionnaire">Questionnaire</a>
-					</li> */}
+					</li> 
 					
 				</ul>
 			</nav>

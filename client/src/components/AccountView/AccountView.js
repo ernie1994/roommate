@@ -12,6 +12,7 @@ class AccountView extends React.Component {
 	}
 
 	componentWillMount = () => {
+		console.log("willmountfire");
 		Axios.get('/api/user').then((res)=> {
 			// console.log(res.data.user);
 			if(res.data.user == null){
@@ -46,8 +47,9 @@ class AccountView extends React.Component {
 							</Col>
 						</Row>
 						<Row>
+							<h5>Additional Info</h5>
 							<Col md={12}>
-								<h5>Additional Info</h5>
+								
 								<p><strong>Owns Pets: </strong>{this.state.user.pets}</p>
 								<p><strong>Pet Allergies: </strong>{this.state.user.allergies}</p>
 								<p><strong>Smokes: </strong>{this.state.user.smokes}</p>

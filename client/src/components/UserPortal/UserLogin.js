@@ -10,35 +10,42 @@ import axios from "axios";
 
 class UserLogin extends React.Component {
 
+	constructor(props){
+		super(props);
+		
+	}
+
 	state = {
-		username: "this will not change",
-		password: "niether will this",
+		username: "",
+		password: "",
 		isLoggedIn: false
 	}
 
-	handleInputChange = (event) => {
-		let name = event.target.name;
-		const value = event.target.value;
+	// handleInputChange = (event) => {
+	// 	let name = event.target.name;
+	// 	const value = event.target.value;
 
-		this.setState({
-			[name]: value
-		});
+	// 	this.setState({
+	// 		[name]: value
+	// 	});
 
-	}
+	// }
 
-	handleFormSubmit = () => {
-		API.loginUser({
-			username: this.state.username,
-			password: this.state.password
-		}).then(function (res) {
-			axios.get("/api/user").then((data) => {
-				console.log("we made it bitch", data);
-			})
-		}).then(()=> {
-			this.setState({isLoggedIn: true});
-		})
-	}
+	// handleFormSubmit = () => {
+	// 	API.loginUser({
+	// 		username: this.state.username,
+	// 		password: this.state.password
+	// 	}).then(function (res) {
+	// 		axios.get("/api/user").then((data) => {
+	// 			console.log("we made it bitch", data);
+	// 		})
+	// 	}).then(()=> {
+	// 		this.setState({isLoggedIn: true});
+	// 	})
+	// }
 
+	
+	
 
 
 
@@ -46,7 +53,7 @@ class UserLogin extends React.Component {
 		return (
 			
 			<div>
-				{this.state.isLoggedIn ? <Redirect to='/account' />
+				{this.props.isLoggedIn ? <Redirect to='/account' />
 
 					:
 				
@@ -55,14 +62,14 @@ class UserLogin extends React.Component {
 						<Form>
 							<FormGroup>
 								<Label>Username</Label>
-								<Input type="text" name="username" onChange={this.handleInputChange} />
+								<Input type="text" name="username" onChange={this.props.handleInputChange} />
 							</FormGroup>
 							<FormGroup>
 								<Label>Password</Label>
-								<Input type="password" name="password" onChange={this.handleInputChange} />
+								<Input type="password" name="password" onChange={this.props.handleInputChange} />
 							</FormGroup>
 							<FormText>Don't have an account with us? Sign up for one <a href="/signup">here</a></FormText>
-							<Button onClick={this.handleFormSubmit}>Sign In</Button>
+							<Button onClick={()=> this.props.handleClick()}>Sign In</Button>
 							{/* <Button outline color="danger" onClick={this.test}>USER SIGN IN TEST</Button> */}
 						</Form>
 					</CardBody>

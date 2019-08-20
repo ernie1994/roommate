@@ -16,7 +16,14 @@ const userSchema = new Schema({
     state: { type: String },
     city: { type: String },
     zip: { type: Number },
-	bio: {type: String, minlength: 120, maxlength: 350},
+	bio: {
+		type: String, 
+		minlength: 120, 
+		maxlength: 350,
+	},
+	hobbies: {
+		type: String
+	},
 	allergies: {type: String},
 	pets: {type: String},
 	drinks: {type: String},
