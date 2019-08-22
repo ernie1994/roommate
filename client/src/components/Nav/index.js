@@ -1,63 +1,41 @@
 import React from "react";
-import axios from 'axios';
-// import Redirect from 'react-router-dom';
+import {Nav, NavItem} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
-class Nav extends React.Component {
+class NavBar extends React.Component {
 
-	state = {
-		isLoggedIn: false
-	}
-
-	componentDidMount = () => {
-		axios.get('api/user').then((data)=> {
-			if(data.data.user) {
-				this.setState({isLoggedIn: true});
-			}
-		})
-	}
-
-	handleLogout = () => {
-		axios.post('api/logout').then(()=> {
-			
-			this.setState({isLoggedIn: false});
-		})
+	constructor(props){
+		super(props);
 	}
 
 	render() {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-				<a className="navbar-brand" href="/">
+			<Nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+				<Link className="navbar-brand" to="/">
 					Home
-				</a>
-				<ul className="navbar-nav">
-					{!this.state.isLoggedIn ? 
-
-						<li className="nav-item">
-							<a className="nav-link" href="/login">Sign Up/Log in</a>
-						</li>
-
+				</Link>			
+					{!this.props.userStatus ?
+						<NavItem className="Nav-item">						
+							<Link to="/login">Sign Uo / Login</Link>
+						</NavItem>
 						:
-
-						<li className="nav-item">
-							<a className="nav-link" onClick={this.handleLogout} href="*">Logout</a>
-						</li>
-					
+						<NavItem className="Nav-item">						
+							<Link to="/" onClick={this.props.handleLogout}> Logout </Link>
+						</NavItem>				
 					}
-					<li className="nav-item">
-						<a className="nav-link" href="/post">Post a Room</a>
-					</li>
-					<li className="nav-item">
-						<a className="nav-link" href="/account">Account</a>
-					</li>
-					{/* <li className="nav-item">
-						<a className="nav-link" href="/questionnaire">Questionnaire</a>
-					</li> */}
-					
-				</ul>
-			</nav>
+					<NavItem className="Nav-item">						
+						<Link to="/post"> Post Link Room</Link>
+					</NavItem>
+					<NavItem className="Nav-item">						
+						<Link to="/account"> Account</Link>
+					</NavItem> 
+					 <NavItem className="Nav-item">					
+						<Link to="/questionnaire"> Questionnaire</Link>
+					</NavItem> 
+			</Nav>
     	);
 	}
     
 }
 
-export default Nav;
+export default NavBar;

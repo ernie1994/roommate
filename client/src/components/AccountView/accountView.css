@@ -1,10 +1,6 @@
-
-
-body {
-	 background-color: #45add0;
-}
-
-Form {
+.card {
+	margin-left: 20px;
+	margin-right: 20px;
 	border: solid 4px #dd6080;
 	border-radius: 25px;
 	background: #f2e587;
@@ -12,10 +8,6 @@ Form {
 	color: #343338;
 }
 
-
-
-.btn {
-	background-color: #dd6080;
-	border: #45add0
-
+.accountViewContainer {
+	margin: 10px;
 }
