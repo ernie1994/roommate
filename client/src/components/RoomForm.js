@@ -22,7 +22,8 @@ class RoomForm extends React.Component {
         files: [],
         lat: "",
         lng: "",
-        redirectRoom: null
+        redirectRoom: null,
+        disablePostBtn: false
     };
 
     componentDidMount() {
@@ -60,6 +61,7 @@ class RoomForm extends React.Component {
     };
 
     handleSubmit = event => {
+        this.setState({ disablePostBtn: true });
         event.preventDefault();
         Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address} ${this.city} ${this.state} ${this.zip}&key=AIzaSyBQ1_V_WrUt_H5buMATmErTV5MJp-LedFE`).then((res) => {
 
@@ -81,7 +83,7 @@ class RoomForm extends React.Component {
                             urls: arr
                         }
                     ).then(res => {
-                        this.setState({ redirectRoom: res.data });
+                        this.setState({ redirectRoom: res.data, disablePostBtn: false });
                     });
                 });
             })
@@ -236,7 +238,7 @@ class RoomForm extends React.Component {
                     </FormGroup>
                     <FormGroup row className="d-flex justify-content-center">
                         <Col xs="10" sm="8">
-                            <Button size="lg">Post</Button>
+                            <Button disabled={this.state.disablePostBtn} size="lg">Post</Button>
                         </Col>
                     </FormGroup>
                 </Form>

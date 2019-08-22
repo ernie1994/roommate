@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, Form, FormGroup, Label, Input, FormText, Button } from 'reactstrap';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -26,7 +26,8 @@ class UserLogin extends React.Component {
 
 	}
 
-	handleFormSubmit = () => {
+	handleFormSubmit = event => {
+		event.preventDefault();
 		API.loginUser({
 			username: this.state.username,
 			password: this.state.password
@@ -34,8 +35,8 @@ class UserLogin extends React.Component {
 			axios.get("/api/user").then((data) => {
 				console.log("we made it bitch", data);
 			})
-		}).then(()=> {
-			this.setState({isLoggedIn: true});
+		}).then(() => {
+			this.setState({ isLoggedIn: true });
 		})
 	}
 
@@ -44,29 +45,29 @@ class UserLogin extends React.Component {
 
 	render() {
 		return (
-			
+
 			<div>
 				{this.state.isLoggedIn ? <Redirect to='/' />
 
 					:
-				
-				<Card>
-					<CardBody>
-						<Form>
-							<FormGroup>
-								<Label>Username</Label>
-								<Input type="text" name="username" onChange={this.handleInputChange} />
-							</FormGroup>
-							<FormGroup>
-								<Label>Password</Label>
-								<Input type="password" name="password" onChange={this.handleInputChange} />
-							</FormGroup>
-							<FormText>Don't have an account with us? Sign up for one <a href="/signup">here</a></FormText>
-							<Button outline color="success" onClick={this.handleFormSubmit}>Sign In</Button>
-							{/* <Button outline color="danger" onClick={this.test}>USER SIGN IN TEST</Button> */}
-						</Form>
-					</CardBody>
-				</Card>
+
+					<Card>
+						<CardBody>
+							<Form onSubmit={this.handleFormSubmit}>
+								<FormGroup>
+									<Label>Username</Label>
+									<Input type="text" name="username" onChange={this.handleInputChange} />
+								</FormGroup>
+								<FormGroup>
+									<Label>Password</Label>
+									<Input type="password" name="password" onChange={this.handleInputChange} />
+								</FormGroup>
+								<FormText>Don't have an account with us? Sign up for one <a href="/signup">here</a></FormText>
+								<Button outline color="success">Sign In</Button>
+								{/* <Button outline color="danger" onClick={this.test}>USER SIGN IN TEST</Button> */}
+							</Form>
+						</CardBody>
+					</Card>
 				}
 			</div>
 		)
