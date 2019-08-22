@@ -3,6 +3,7 @@ import { Jumbotron, Form, FormGroup, Label, Input, Col, Button, Row } from "reac
 import SearchResult from "./SearchResult";
 import API from "../utils/API";
 import RoomDetail from "./RoomDetail";
+import Axios from "axios";
 
 class SearchForm extends React.Component {
 
@@ -13,8 +14,23 @@ class SearchForm extends React.Component {
         catAllergy: false,
         otherAllergy: false,
         results: [],
-        room: null
+        room: null,
+        range: 3000,
+        lat: 0,
+        lng: 0,
     };
+
+    getUserLocation = () => {
+        return Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.location}A&key=AIzaSyBQ1_V_WrUt_H5buMATmErTV5MJp-LedFE`).then((res) => {
+
+            const result = res.data.results[0];
+            if (result) {
+                const lat = result.geometry.location.lat;
+                const lng = result.geometry.location.lng;
+                return { lat: lat, lng: lng };
+            }
+        });
+    }
 
     handleBack = () => {
         const newState = this.state.room ? { room: null } : { results: [] };
@@ -23,19 +39,27 @@ class SearchForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const { location, gender, dogAllergy, catAllergy, otherAllergy } = this.state;
-        const info = {
-            location: location,
-            gender: gender,
-            dogAllergy: dogAllergy,
-            catAllergy: catAllergy,
-            otherAllergy: otherAllergy
-        };
-        API.findRooms(info)
-            .then(res => {
-                var data = res.data ? res.data : [];
-                this.setState({ results: data })
-            });
+
+        this.getUserLocation().then(loc => {
+            const { location, gender, dogAllergy, catAllergy, otherAllergy, range, lat, lng } = this.state;
+            const info = {
+                location: location,
+                gender: gender,
+                dogAllergy: dogAllergy,
+                catAllergy: catAllergy,
+                otherAllergy: otherAllergy,
+                range: range,
+                lat: loc.lat,
+                lng: loc.lng
+            };
+            console.log(info);
+            API.findRooms(info)
+                .then(res => {
+                    var data = res.data ? res.data : [];
+                    this.setState({ results: data })
+                });
+        });
+
     };
 
     handleChange = event => {
@@ -55,11 +79,14 @@ class SearchForm extends React.Component {
     render() {
         const styles = {
             jumbotron: {
-                backgroundColor: "black"
+                backgroundColor: "black",
+                backgroundImage: `url("/images/condo.jpeg")`,
+                backgroundPosition: "50% 70%"
             },
             header: {
-                color: "white",
-                textAlign: "center"
+                color: "black",
+                textAlign: "center",
+                fontWeight: "bold"
             }
         };
 
@@ -95,6 +122,22 @@ class SearchForm extends React.Component {
                             <Input required onChange={this.handleChange} type="text" name="location" id="location" placeholder="Enter city, state or zip code" />
                         </Col>
                     </FormGroup>
+
+                    <FormGroup row className="d-flex justify-content-center">
+                        <Col xs="10" sm="8">
+                            <Label for="Range">Distance Range</Label>
+                            <Input onChange={this.handleChange} type="select" name="range" id="gender">
+                                <option value="">Show All</option>
+                                <option value={5}>5</option>
+                                <option value={10}>10</option>
+                                <option value={15}>15</option>
+                                <option value={20}>20</option>
+                                <option value={25}>25</option>
+
+                            </Input>
+                        </Col>
+                    </FormGroup>
+
                     <FormGroup row className="d-flex justify-content-center">
                         <Col xs="10" sm="8">
                             <Label for="gender">Gender Preference</Label>

@@ -1,6 +1,4 @@
 import axios from 'axios';
-// const passport = require('../../config/passport');
-// import passport from '../../config/passport';
 
 export default {
 
@@ -22,7 +20,6 @@ export default {
 	},
 
 	loginUser: function (info) {
-		// console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 		console.log(info);
 		return axios.post('/api/login', info);
 
@@ -35,6 +32,10 @@ export default {
 
 	userTest: function () {
 		return axios.get('/login');
+	},
+
+	getCurrentUser: function () {
+		return axios.get('/api/user');
 	}
 
 

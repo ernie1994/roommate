@@ -9,28 +9,25 @@ const userSchema = new Schema({
 
 	username: { type: String },
 	password: { type: String },
-	name: {type: String},
-	age: {type: Number}, 
-	gender: {type: String},
+	name: { type: String },
+	age: { type: Number },
+	gender: { type: String },
 	address: { type: String },
-    state: { type: String },
-    city: { type: String },
-    zip: { type: Number },
-	bio: {
-		type: String, 
-		minlength: 120, 
-		maxlength: 350,
-	},
-	hobbies: {
-		type: String
-	},
-	allergies: {type: String},
-	pets: {type: String},
-	drinks: {type: String},
-	smokes: {type: String},
-	upLate: {type: String}
-
-})
+	state: { type: String },
+	city: { type: String },
+	zip: { type: Number },
+	bio: { type: String },
+	allergies: { type: String },
+	pets: { type: String },
+	drinks: { type: String },
+	smokes: { type: String },
+	upLate: { type: String },
+	profileImage: { type: String },
+	email: { type: String },
+	phone: { type: String }
+	//might need this rooms property later
+	// rooms: [{ type: Schema.Types.ObjectId, ref: "Room" }]
+});
 
 userSchema.methods = {
 	checkPassword: function (inputPassword) {

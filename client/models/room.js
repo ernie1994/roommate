@@ -12,7 +12,9 @@ const roomSchema = new Schema({
     otherAllergy: Boolean,
     gender: { type: String },
     user: { type: Schema.Types.ObjectId, ref: "User" },
-    images: [{ type: Schema.Types.ObjectId, ref: "Image" }]
+    images: [{ type: Schema.Types.ObjectId, ref: "Image" }],
+    lat: { type: String },
+    lng: { type: String }
 });
 
 const Room = mongoose.model("Room", roomSchema);

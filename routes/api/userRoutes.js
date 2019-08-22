@@ -1,7 +1,7 @@
 const router = require('express').Router();
 // const passport = require('../../client/config/passport');
 // const userController = require('../../client/controller/userController');
-// const roomController = require('../../client/controller/roomController');
+const roomController = require('../../client/controller/roomController');
 // const loginController = require('../../client/controller/authController');
 
 
@@ -10,10 +10,10 @@ const router = require('express').Router();
 // 	.post(userController.create)
 // 	.delete(userController.deleteAll);
 
-// router.route('/rooms')
-// 	.get(roomController.getSome)
-// 	.post(roomController.create)
-// 	.delete(roomController.deleteAll);
+router.route('/rooms')
+    .get(roomController.getSome)
+    .post(roomController.create)
+    .delete(roomController.deleteAll);
 
 // router.route('/signup')
 // 	.post(loginController.createUser);

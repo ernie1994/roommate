@@ -1,5 +1,6 @@
 import React from "react";
-import {Nav, NavItem, NavLink} from 'reactstrap';
+import {Nav, NavItem} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 class NavBar extends React.Component {
 
@@ -10,26 +11,26 @@ class NavBar extends React.Component {
 	render() {
 		return (
 			<Nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-				<NavLink className="navbar-brand" href="/">
+				<Link className="navbar-brand" to="/">
 					Home
-				</NavLink>			
+				</Link>			
 					{!this.props.userStatus ?
 						<NavItem className="Nav-item">						
-							<NavLink href="/login">Sign Uo / Login</NavLink>
+							<Link to="/login">Sign Uo / Login</Link>
 						</NavItem>
 						:
 						<NavItem className="Nav-item">						
-							<NavLink href="/" onClick={this.handleLogout}> Logout </NavLink>
+							<Link to="/" onClick={this.props.handleLogout}> Logout </Link>
 						</NavItem>				
 					}
 					<NavItem className="Nav-item">						
-						<NavLink href="/post"> Post NavLink Room</NavLink>
+						<Link to="/post"> Post Link Room</Link>
 					</NavItem>
 					<NavItem className="Nav-item">						
-						<NavLink href="/account"> Account</NavLink>
+						<Link to="/account"> Account</Link>
 					</NavItem> 
 					 <NavItem className="Nav-item">					
-						<NavLink href="/questionnaire"> Questionnaire</NavLink>
+						<Link to="/questionnaire"> Questionnaire</Link>
 					</NavItem> 
 			</Nav>
     	);

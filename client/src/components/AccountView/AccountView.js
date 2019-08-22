@@ -21,7 +21,7 @@ class AccountView extends React.Component {
 						<Container className="accountViewContainer">
 							<Row>
 							<Col md={4}>
-								<CardImg top width="200px" height="300px" src="http://lorempixel.com/200/200/" alt="placeholder" className="rounded-circle"/>
+								<CardImg top width="200px" height="300px" src={this.props.user.profileImage} alt="placeholder" className="rounded-circle"/>
 							</Col>
 							<Col md={8}>
 								  <h3>{this.props.user.name}</h3>

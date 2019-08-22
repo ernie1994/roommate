@@ -1,3 +1,5 @@
+const { isPointWithinRadius } = require('geolib');
+
 const db = require('../models');
 
 module.exports = {
@@ -20,12 +22,12 @@ module.exports = {
                 db.Room.findOneAndUpdate(
                     { _id: roomId },
                     { $push: { images: { $each: ids } } },
-                    { new: true },
-                    (err, room) => {
-                        if (err) throw err;
+                    { new: true })
+                    .populate("user")
+                    .populate("images")
+                    .then(room => {
                         res.json(room);
-                    }
-                );
+                    });
             })
             .catch(err => res.status(422).json(err));
 
@@ -38,6 +40,7 @@ module.exports = {
     getSome: function (req, res) {
 
         var query = {};
+        //console.log(req.query)
 
         if (req.query.gender) query.gender = req.query.gender;
 
@@ -47,26 +50,56 @@ module.exports = {
 
         if (req.query.otherAllergy === "true") query.otherAllergy = false;
 
-
         if (req.query.location) {
-
-            const arr = [];
-
-            const locationWords = req.query.location.split(new RegExp(" |,"));
-
-            locationWords.forEach(word => {
-                arr.push({ address: { $regex: `${word}`, $options: 'i' } });
-                arr.push({ city: { $regex: `${word}`, $options: 'i' } });
-                arr.push({ state: { $regex: `${word}`, $options: 'i' } });
-                arr.push({ zip: { $regex: `${word}`, $options: 'i' } });
-            });
+            // console.log(req.query)
 
 
-            query["$or"] = arr;
+            // const arr = [];
+
+            // const locationWords = req.query.location.split(new RegExp(" |,"));
+
+            // locationWords.forEach(word => {
+            //     arr.push({ address: { $regex: `${word}`, $options: 'i' } });
+            //     arr.push({ city: { $regex: `${word}`, $options: 'i' } });
+            //     arr.push({ state: { $regex: `${word}`, $options: 'i' } });
+            //     arr.push({ zip: { $regex: `${word}`, $options: 'i' } });
+            // });
+
+
+            // query["$or"] = arr;
         }
 
         db.Room.find(query).populate("user").populate("images")
-            .then(data => res.json(data))
+            .then(data => {
+
+                let filteredData = data.filter(roomPost => {
+                    if (roomPost.lat && roomPost.lng) {
+                        const isInRadius = isPointWithinRadius(
+                            { latitude: req.query.lat, longitude: req.query.lng },
+                            { latitude: roomPost.lat, longitude: roomPost.lng },
+                            req.query.range * 1.6 * 1000
+                        );
+                        console.log(isInRadius);
+                        console.log(roomPost.lat, roomPost.lng, roomPost.city);
+                        return isInRadius;
+                    }
+
+                    return false;
+                });
+                //console.log(filteredData);
+                // let filteredData = data.filter(roomPost => {
+                //     const testResult = isPointWithinRadius(
+                //         { latitude: req.query.lat, longitude: req.query.lng },
+                //         { latitude: roomPost.lat, longitude: roomPost.lng },
+                //         req.query.range
+                //     );
+                //     console.log(testResult);
+                //     return true;
+                // }
+                // );
+                //console.log(filteredData);
+                return res.json(filteredData)
+            })
             .catch(err => res.status(422).json(err))
     },
     deleteAll: function (_req, res) {

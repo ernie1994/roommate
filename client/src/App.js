@@ -12,6 +12,7 @@ import SearchForm from "./components/SearchForm";
 import RoomForm from './components/RoomForm';
 
 import AccountView from './components/AccountView/AccountView';
+import RoomDetail from './components/RoomDetail';
 
 import API from './utils/API';
 
@@ -49,8 +50,9 @@ class App extends React.Component {
 		})
 	}
 	logoutUser = ()=> {
+		console.log("log me out");
 		axios.post('api/logout').then(()=> {
-			this.setState({isLoggedIn: false});
+			this.setState({isloggedIn: false});
 		})
 	}
 
@@ -67,7 +69,7 @@ class App extends React.Component {
 			<>
 				<Container fluid style={styles.container}>
 					<Router>
-						<Nav userStatus={this.state.isloggedIn ? true : false} />
+						<Nav userStatus={this.state.isloggedIn ? true : false} handleLogout={this.logoutUser}/>
 						<Switch>
 							<Route exact path="/" component={SearchForm}></Route>
 							<Route exact path="/questionnaire" component={(props)=> <Questionnaire handleFormSubmit={this.updateUser} />}/>
