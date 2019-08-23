@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Jumbotron } from 'reactstrap';
+import "../../../src/styles.css";
 // import Redirect from 'react-router-dom';
 
 class Navi extends React.Component {
@@ -39,42 +40,94 @@ class Navi extends React.Component {
 		});
 	}
 
+	openNav() {
+		document.getElementById("mySidenav").style.width = "250px";
+	}
+
+	closeNav() {
+		document.getElementById("mySidenav").style.width = "0";
+	}
 	render() {
+
+		// const styles = {
+		// 	jumbotron: {
+		// 		backgroundColor: "white",
+		// 		backgroundImage: `url("/images/blue-grad.jpg")`
+		// 		// backgroundPosition: "50% 70%"
+		// 	},
+		// 	navLink: {
+		// 		backgroundImage: "",
+		// 		fontSize: "25px",
+		// 		fontFamily: "Kaushan Script"
+		// 	},
+
+		// 	img: {
+		// 		width: "40%",
+		// 		height: "40%",
+		// 	},
+
+		// 	logtainer: {
+		// 		backgroundColor: "red"
+		// 	}
+
+		// }
 		return (
 			<div>
-				<Navbar color="faded" light>
-					<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-					<NavbarBrand href="/#" className="mr-auto">Menu</NavbarBrand>
+				<Jumbotron>
 
-					<Collapse isOpen={!this.state.collapsed} navbar>
-						<Nav vertical navbar>
-							<NavItem className="nav-item">
-								<NavLink className="nav-link" href="/">Home/Search</NavLink>
-							</NavItem>
-							<NavItem className="nav-item">
-								<NavLink className="nav-link" href="/post">Post a Room</NavLink>
-							</NavItem>
-							<NavItem className="nav-item">
-								<NavLink className="nav-link" href="/account">My Profile</NavLink>
-							</NavItem>
-							{!this.state.isLoggedIn ?
+					<div className="display-4 logtainer" >
+						<img src="../../../images/room-logo2.png" alt="logo"></img>
+					</div>
+
+
+
+					<Navbar color="faded" light>
+						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+						<NavbarBrand className="nav-link" href="/#" className="mr-auto">Menu</NavbarBrand>
+
+
+
+						<Collapse isOpen={!this.state.collapsed} navbar>
+							<Nav vertical navbar>
+
 								<NavItem className="nav-item">
-									<NavLink className="nav-link" href="/login">Sign-Up/Log-in</NavLink>
+									<NavLink className="nav-link" href="/">Home/Search</NavLink>
 								</NavItem>
-								:
+
 								<NavItem className="nav-item">
-									<NavLink className="nav-link" onClick={this.handleLogout} href="*">Logout</NavLink>
+									<NavLink className="nav-link" href="/post">Post a Room</NavLink>
 								</NavItem>
-							}
-						</Nav>
-					</Collapse>
-				</Navbar>
+
+								<NavItem className="nav-item">
+									<NavLink className="nav-link" href="/account">My Profile</NavLink>
+								</NavItem>
+
+								{!this.state.isLoggedIn ?
+									<NavItem className="nav-item">
+										<NavLink className="nav-link" href="/login">Sign-Up/Log-in</NavLink>
+									</NavItem>
+									:
+									<NavItem className="nav-item">
+										<NavLink className="nav-link" onClick={this.handleLogout} href="*">Logout</NavLink>
+									</NavItem>
+								}
+
+							</Nav>
+						</Collapse>
+
+					</Navbar>
+
+				</Jumbotron>
+
 			</div>
-			// OLD NAV BAR
+
+
+
+
 			// <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 			// 	<a className="navbar-brand" href="/">
 			// 		Home
-			// 	</a>
+			//  	</a>
 			// 	<ul className="navbar-nav">
 			// 		{!this.state.isLoggedIn ?
 
@@ -102,6 +155,7 @@ class Navi extends React.Component {
 			// 	</ul>
 			// </nav>
 		);
+
 	}
 
 }

@@ -111,10 +111,6 @@ class SearchForm extends React.Component {
 
         return (
             <div>
-                <Jumbotron style={styles.jumbotron}>
-                    <h1 className="display-4" style={styles.header}>Find A Roommate</h1>
-                    <br></br><br></br>
-                </Jumbotron>
                 <Form onSubmit={this.handleSubmit} className="my-5">
                     <FormGroup row className="d-flex justify-content-center">
                         <Col xs="10" sm="8">
