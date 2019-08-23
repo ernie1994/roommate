@@ -81,9 +81,9 @@ class Navi extends React.Component {
 
 
 
-					<Navbar color="faded" light>
+					<Navbar className="navbar-class" color="faded" light>
 						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-						<NavbarBrand className="nav-link" href="/#" className="mr-auto">Menu</NavbarBrand>
+						<NavbarBrand className="nav-link mr-auto" href="/#">Menu</NavbarBrand>
 
 
 

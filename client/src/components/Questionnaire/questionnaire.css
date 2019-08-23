@@ -6,7 +6,7 @@ body {
 }
 
 Form {
-	border: solid 1px black;
+	border: solid 1px #646464;
 	border-radius: 10px;
 	background-color: white;
 	background-image: linear-gradient(to bottom, white,  #c3def0 );
@@ -22,3 +22,9 @@ Form {
 	background-color: #dd6080;
 	border: #45add0
 }
+
+@media screen and (max-width: 700px) {
+    form {
+		margin: 30px;
+	}
+  }
