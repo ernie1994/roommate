@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Jumbotron } from 'reactstrap';
 import "../../../src/styles.css";
@@ -40,13 +41,6 @@ class Navi extends React.Component {
 		});
 	}
 
-	openNav() {
-		document.getElementById("mySidenav").style.width = "250px";
-	}
-
-	closeNav() {
-		document.getElementById("mySidenav").style.width = "0";
-	}
 	render() {
 
 		// const styles = {
