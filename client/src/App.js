@@ -6,7 +6,7 @@ import Questionnaire from './components/Questionnaire/Questionnaire';
 import UserLogin from './components/UserPortal/UserLogin';
 import UserSignup from './components/UserPortal/UserSignup';
 
-import Nav from "./components/Nav/index"
+import Navi from "./components/Nav/index"
 import { Container } from "reactstrap";
 import SearchForm from "./components/SearchForm";
 import RoomForm from './components/RoomForm';
@@ -83,6 +83,7 @@ class App extends React.Component {
 			</>
 		);
 	}
+
 }
 
 export default App;

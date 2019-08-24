@@ -1,15 +1,21 @@
 
 
 body {
-	 background-color: #45add0;
+	background-color: white;
+	/* background-image: linear-gradient(to bottom, white,  #dceaf3 ); */
 }
 
 Form {
-	border: solid 4px #dd6080;
-	border-radius: 25px;
-	background: #f2e587;
+	border: solid 1px black;
+	border-radius: 10px;
+	background-color: white;
+	background-image: linear-gradient(to bottom, white,  #c3def0 );
 	padding: 30px;
-	color: #343338;
+	color: grey;
+	margin: 200px;
+	box-shadow:20px 20px 50px  #646464 ;
+	
+	/* opacity: 0.85; */
 }
 
 
@@ -17,5 +23,4 @@ Form {
 .btn {
 	background-color: #dd6080;
 	border: #45add0
-
 }
