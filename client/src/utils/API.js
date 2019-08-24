@@ -36,6 +36,10 @@ export default {
 
 	getCurrentUser: function () {
 		return axios.get('/api/user');
+	},
+
+	getUserRooms: function() {
+		return axios.get('/userRooms');
 	}
 
 

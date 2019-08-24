@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3001;
 const passport = require("./passport");
 const session = require("express-session");
 const http = require("http").createServer(3005);
-const io = require("socket.io")(http);
+// const io = require("socket.io")(http);
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -47,6 +47,6 @@ app.listen(PORT, function () {
 
 //socket.io code
 
-io.on("connection", function (socket) {
-    console.log("connected to socket io");
-});
+// io.on("connection", function (socket) {
+//     console.log("connected to socket io");
+// });

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Jumbotron } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Jumbotron } from 'reactstrap';
 import "../../../src/styles.css";
 // import Redirect from 'react-router-dom';
 
@@ -83,63 +83,40 @@ class Navi extends React.Component {
 
 					<Navbar color="faded" light>
 						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-						<NavbarBrand className="nav-link" href="/#" className="mr-auto">Menu</NavbarBrand>
+						<NavbarBrand className="nav-link" to="/#" className="mr-auto">Menu</NavbarBrand>
 
 						<Collapse isOpen={!this.state.collapsed} navbar>
 							<Nav vertical navbar>
-								{/*       
-//This is what was in master for the following section. Saving it in comments incase something breaks
-//       <Nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-// 				<Link className="navbar-brand" to="/">
-// 					Home
-// 				</Link>			 */}
-								{/* // 					{!this.props.userStatus ? */}
-								{/* // 						<NavItem className="Nav-item">						
-// 							<Link to="/login">Sign Uo / Login</Link>
-// 						</NavItem>
-// 						:
-// 						<NavItem className="Nav-item">						
-// 							<Link to="/" onClick={this.props.handleLogout}> Logout </Link>
-// 						</NavItem>				
-// 					}
-// 					<NavItem className="Nav-item">						
-// 						<Link to="/post"> Post Link Room</Link>
-// 					</NavItem>
-// 					<NavItem className="Nav-item">						
-// 						<Link to="/account"> Account</Link>
-// 					</NavItem> 
-// 					 <NavItem className="Nav-item">					
-// 						<Link to="/questionnaire"> Questionnaire</Link>
-// 					</NavItem> 
-// 			</Nav> */}
-								{/* //     	);
-								// 	}
+								       
 
-								// } */}
+       {/* <Nav className="navbar navbar-expand-lg navbar-dark bg-dark"> */}
+ 				<Link className="navbar-brand" to="/">
+ 					Home
+ 				</Link>			 
+													{!this.props.userStatus ? 
+														<NavItem className="Nav-item">						
+ 							<Link className="nav-link" to="/login">Sign Up / Login</Link>
+ 						</NavItem>
+ 						:
+ 						<NavItem className="Nav-item">						
+ 							<Link className="nav-link"to="/" onClick={this.props.handleLogout}> Logout </Link>
+					</NavItem>				
+					}
+			
 
 
+
+								
 
 								<NavItem className="nav-item">
-									<NavLink className="nav-link" href="/">Home/Search</NavLink>
+									<Link className="nav-link" to="/post">Post a Room</Link>
 								</NavItem>
 
 								<NavItem className="nav-item">
-									<NavLink className="nav-link" href="/post">Post a Room</NavLink>
+									<Link className="nav-link" to="/account">My Profile</Link>
 								</NavItem>
 
-								<NavItem className="nav-item">
-									<NavLink className="nav-link" href="/account">My Profile</NavLink>
-								</NavItem>
-
-								{!this.state.isLoggedIn ?
-									<NavItem className="nav-item">
-										<NavLink className="nav-link" href="/login">Sign-Up/Log-in</NavLink>
-									</NavItem>
-									:
-									<NavItem className="nav-item">
-										<NavLink className="nav-link" onClick={this.handleLogout} href="*">Logout</NavLink>
-									</NavItem>
-								}
+							
 
 							</Nav>
 						</Collapse>

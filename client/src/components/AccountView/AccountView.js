@@ -1,8 +1,9 @@
 import React from 'react';
 // import { Redirect } from 'react-router';
 import { Row, Col, Container, Card, CardText, CardImg, CardHeader, Button, Wrapper } from 'reactstrap';
-import Axios from 'axios';
+import axios from 'axios';
 import './accountView.css';
+import API from '../../utils/API';
 
 class AccountView extends React.Component {
 
@@ -10,6 +11,7 @@ class AccountView extends React.Component {
 		super(props);
 		this.user = props.user;
 	}
+	
 
 	render() {
 		return (
@@ -31,11 +33,15 @@ class AccountView extends React.Component {
 								  <p><strong>About Me: </strong><br></br>{this.props.user.bio} </p>
 							</Col>
 						</Row>
+						
 						<Row>
-							<h5>Additional Info</h5>
-							<Col md={12}>
+							<Col md={2}></Col>
+							<Col md={4}>
 								<p><strong>Owns Pets: </strong>{this.props.user.pets}</p>
 								<p><strong>Pet Allergies: </strong>{this.props.user.allergies}</p>
+								
+							</Col>
+							<Col md={4}>
 								<p><strong>Smokes: </strong>{this.props.user.smokes}</p>
 								<p><strong>Drinks: </strong>{this.props.user.drinks}</p>
 								<p><strong>Up Late: </strong>{this.props.user.upLate}</p>

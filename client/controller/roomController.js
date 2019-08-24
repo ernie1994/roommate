@@ -106,5 +106,9 @@ module.exports = {
         db.Room.deleteMany({})
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));
-    }
+    },
+	getUserRooms: function(req,res) {
+		console.log(req);
+		// db.Room.find()
+	}
 };
