@@ -92,7 +92,7 @@ class Questionnaire extends React.Component {
 				{!this.state.formSubmitted ?
 					<Container>
 
-						<Form name="roommateSurvey" id="roommateSurvey" onSubmit={this.handleFormSubmit}>
+						<Form name="roommateSurvey" id="roommateSurvey">
 
 							<FormGroup className="form-group">
 								<Label>Name</Label>
@@ -117,16 +117,18 @@ class Questionnaire extends React.Component {
 									<Input required type="text" className="form-control" placeholder="Zipcode" name="zip" onChange={this.handleInputChange} />
 								</Col>
 							</Row>
+
 							<FormGroup className="form-group">
 								<Label>Gender</Label>
 								<select required className="form-control" name="gender" onChange={this.handleInputChange}>
 									<option hidden></option>
-									<option value="male">Male</option>
-									<option value="female">Female</option>
-									<option value="nonbinary">Nonbinary</option>
-									<option value="prefer not to say">Prefer not to say</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Nonbinary">Nonbinary</option>
+									<option value="Prefer not to say">Prefer not to say</option>
 								</select>
 							</FormGroup>
+
 							<FormGroup>
 								<Label for="bio">Tell us a little bit about yourself</Label>
 								<Input required type="textarea" name="bio" id="bio" onChange={this.handleInputChange} />
@@ -146,46 +148,46 @@ class Questionnaire extends React.Component {
 								<Label className="mr-5">Do you have any pet allergies?</Label>
 								<select required className="form-control mbd-select colorful-select" name="allergies" onChange={this.handleInputChange} >
 									<option hidden />
-									<option value="cats">Cats</option>
-									<option value="dogs">Dogs</option>
-									<option value="other">Other</option>
-									<option value="none">No allergies</option>
+									<option value="Cats">Cats</option>
+									<option value="Dogs">Dogs</option>
+									<option value="Other">Other</option>
+									<option value="None">No allergies</option>
 								</select>
 
 
 								<Label className='mr-5'>Do you own any pets?</Label>
 								<select required className="form-control mbd-select colorful-select" name="pets" onChange={this.handleInputChange}>
 									<option hidden />
-									<option value="cats">Cat/ Cats</option>
-									<option value="dogs">Dog/ Dogs</option>
-									<option value="other">Other</option>
-									<option value="none">No pets</option>
+									<option value="Cats">Cat / Cats</option>
+									<option value="Dogs">Dog / Dogs</option>
+									<option value="Other">Other</option>
+									<option value="None">No pets</option>
 								</select>
 
 								<Label className='mr-5'>Do you drink?</Label>
 								<select required className="form-control mbd-select colorful-select" name="drinks" onChange={this.handleInputChange}>
 									<option hidden />
-									<option value="does drink">Yes</option>
-									<option value="doesnt drink">No</option>
-									<option value="sometimes drinks">Sometimes</option>
+									<option value="Does drink">Yes</option>
+									<option value="Doesn't drink">No</option>
+									<option value="Sometimes drinks">Sometimes</option>
 								</select>
 
 								<Label className='mr-5'>Do you smoke?</Label>
 								<select required className="form-control mbd-select colorful-select" name="smokes" onChange={this.handleInputChange}>
 									<option hidden />
-									<option value="does smoke">Yes</option>
-									<option value="doesnt smoke">No</option>
-									<option value="sometimes smokes">Sometimes</option>
+									<option value="Does smoke">Yes</option>
+									<option value="Doesn't smoke">No</option>
+									<option value="Sometimes smokes">Sometimes</option>
 								</select>
 
 								<Label className='mr-5'>Are you often up late (Past 1 AM)?</Label>
 								<select required className="form-control mbd-select colorful-select" name="upLate" onChange={this.handleInputChange}>
 									<option hidden />
-									<option value="never">Never</option>
-									<option value="almost never">Almost never</option>
-									<option value="sometimes">Sometimes</option>
-									<option value="most of the time">Most of the time</option>
-									<option value="all the time">All the time</option>
+									<option value="Never">Never</option>
+									<option value="Almost never">Almost never</option>
+									<option value="Sometimes">Sometimes</option>
+									<option value="Most of the time">Most of the time</option>
+									<option value="All the time">All the time</option>
 								</select>
 							</FormGroup>
 							<FormGroup row className="d-flex justify-content-start">
@@ -205,13 +207,13 @@ class Questionnaire extends React.Component {
 									</Input>
 								</Col>
 							</FormGroup>
-							<Button>Submit Form</Button>
+							<Button onClick={this.handleFormSubmit}>Submit Form</Button>
 						</Form>
 					</Container>
 
 					:
 
-					<Redirect to='/' />
+					<Redirect to='/account' />
 				}
 			</div>
 
