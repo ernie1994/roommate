@@ -23,10 +23,10 @@ class App extends React.Component {
 		isSignedUp: false,
 		username: "",
 		password: "",
-		currentUser: {}	
+		currentUser: {}
 	}
 
-	handleInputChange = (event)=> {
+	handleInputChange = (event) => {
 		let name = event.target.name;
 		const value = event.target.value;
 
@@ -35,24 +35,24 @@ class App extends React.Component {
 		});
 	}
 
-	loginUser = ()=> {
+	loginUser = () => {
 		API.loginUser({
 			username: this.state.username,
 			password: this.state.password
-		}).then((result)=> {
-			this.setState({isloggedIn: true, currentUser: result.data.user})
+		}).then((result) => {
+			this.setState({ isloggedIn: true, currentUser: result.data.user })
 		})
 	}
 
-	updateUser = (newUser)=> {
-		API.updateUser({newUser}).then((res)=> {
+	updateUser = (newUser) => {
+		API.updateUser({ newUser }).then((res) => {
 			console.log(res);
 		})
 	}
-	logoutUser = ()=> {
+	logoutUser = () => {
 		console.log("log me out");
-		axios.post('api/logout').then(()=> {
-			this.setState({isloggedIn: false});
+		axios.post('api/logout').then(() => {
+			this.setState({ isloggedIn: false });
 		})
 	}
 
@@ -69,14 +69,14 @@ class App extends React.Component {
 			<>
 				<Container fluid style={styles.container}>
 					<Router>
-						<Nav userStatus={this.state.isloggedIn ? true : false} handleLogout={this.logoutUser}/>
+						<Navi userStatus={this.state.isloggedIn ? true : false} handleLogout={this.logoutUser} />
 						<Switch>
 							<Route exact path="/" component={SearchForm}></Route>
-							<Route exact path="/questionnaire" component={(props)=> <Questionnaire handleFormSubmit={this.updateUser} />}/>
-							<Route exact path="/login" render={(props)=> <UserLogin handleClick={this.loginUser} handleInputChange={this.handleInputChange} userStatus={this.state.isloggedIn ? true : false} />}/>					
+							<Route exact path="/questionnaire" component={(props) => <Questionnaire handleFormSubmit={this.updateUser} />} />
+							<Route exact path="/login" render={(props) => <UserLogin handleClick={this.loginUser} handleInputChange={this.handleInputChange} userStatus={this.state.isloggedIn ? true : false} />} />
 							<Route exact path="/signup" component={UserSignup}></Route>
 							<Route exact path="/post" component={RoomForm}></Route>
-							<Route exact path="/account" component={(props)=> <AccountView user={this.state.currentUser}/>} />
+							<Route exact path="/account" component={(props) => <AccountView user={this.state.currentUser} />} />
 						</Switch>
 					</Router>
 				</Container>
