@@ -6,11 +6,12 @@ body {
 }
 
 Form {
-margin-left: 20px;
-	margin-right: 20px;
-	border: solid 4px #dd6080;
-	border-radius: 25px;
-	background: #f2e587;
+
+	border: solid 1px #646464;
+	border-radius: 10px;
+	background-color: white;
+	background-image: linear-gradient(to bottom, white,  #c3def0 );
+
 	padding: 30px;
 	color: #343338;
 	
@@ -23,3 +24,9 @@ margin-left: 20px;
 	background-color: #dd6080;
 	border: #45add0
 }
+
+@media screen and (max-width: 700px) {
+    form {
+		margin: 30px;
+	}
+  }

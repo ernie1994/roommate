@@ -41,13 +41,6 @@ class Navi extends React.Component {
 		});
 	}
 
-	openNav() {
-		document.getElementById("mySidenav").style.width = "250px";
-	}
-
-	closeNav() {
-		document.getElementById("mySidenav").style.width = "0";
-	}
 	render() {
 
 		// const styles = {
@@ -73,7 +66,6 @@ class Navi extends React.Component {
 
 		// }
 		return (
-
 			<div>
 				<Jumbotron>
 
@@ -83,7 +75,9 @@ class Navi extends React.Component {
 
 					<Navbar color="faded" light>
 						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-						<NavbarBrand className="nav-link" to="/#" className="mr-auto">Menu</NavbarBrand>
+
+						<NavbarBrand className="nav-link mr-auto" href="/#">Menu</NavbarBrand>
+
 
 						<Collapse isOpen={!this.state.collapsed} navbar>
 							<Nav vertical navbar>

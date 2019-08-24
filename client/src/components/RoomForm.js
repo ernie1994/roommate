@@ -119,7 +119,7 @@ class RoomForm extends React.Component {
         const styles = {
             jumbotron: {
                 backgroundColor: "black",
-                backgroundImage: `url("/images/dark_condo.jpg")`,
+
                 backgroundPosition: "50% 70%"
             },
             header: {
