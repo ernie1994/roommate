@@ -6,6 +6,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const passport = require("./passport");
 const session = require("express-session");
+const http = require("http").createServer(3005);
+const io = require("socket.io")(http);
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -41,4 +43,10 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/userlist");
 // Start the API server
 app.listen(PORT, function () {
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
+
+//socket.io code
+
+io.on("connection", function (socket) {
+    console.log("connected to socket io");
 });
