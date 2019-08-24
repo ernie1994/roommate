@@ -3,15 +3,18 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Row, Col
 } from 'reactstrap';
+import "../../src/styles.css";
 
 class SearchResult extends React.Component {
     render() {
+
         return (
-            <Card
+            <Card className="mb-3"
                 onClick={
                     () => this.props.handleRoomClick({ ...this.props })
                 }
-                className="mb-3">
+            >
+
                 <Row className="no-gutters">
                     <Col md="2">
                         <CardImg className="card-img" src={this.props.images[0] ? this.props.images[0].url : this.props.image} alt=""></CardImg>

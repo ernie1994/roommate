@@ -73,16 +73,43 @@ class Navi extends React.Component {
 						<img src="../../../images/room-logo2.png" alt="logo"></img>
 					</div>
 
-
-
-					<Navbar className="navbar-class" color="faded" light>
+					<Navbar color="faded" light>
 						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
 						<NavbarBrand className="nav-link mr-auto" href="/#">Menu</NavbarBrand>
 
-
-
 						<Collapse isOpen={!this.state.collapsed} navbar>
 							<Nav vertical navbar>
+								{/*       
+//This is what was in master for the following section. Saving it in comments incase something breaks
+//       <Nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+// 				<Link className="navbar-brand" to="/">
+// 					Home
+// 				</Link>			 */}
+								{/* // 					{!this.props.userStatus ? */}
+								{/* // 						<NavItem className="Nav-item">						
+// 							<Link to="/login">Sign Uo / Login</Link>
+// 						</NavItem>
+// 						:
+// 						<NavItem className="Nav-item">						
+// 							<Link to="/" onClick={this.props.handleLogout}> Logout </Link>
+// 						</NavItem>				
+// 					}
+// 					<NavItem className="Nav-item">						
+// 						<Link to="/post"> Post Link Room</Link>
+// 					</NavItem>
+// 					<NavItem className="Nav-item">						
+// 						<Link to="/account"> Account</Link>
+// 					</NavItem> 
+// 					 <NavItem className="Nav-item">					
+// 						<Link to="/questionnaire"> Questionnaire</Link>
+// 					</NavItem> 
+// 			</Nav> */}
+								{/* //     	);
+								// 	}
+
+								// } */}
+
+
 
 								<NavItem className="nav-item">
 									<NavLink className="nav-link" href="/">Home/Search</NavLink>
@@ -114,44 +141,8 @@ class Navi extends React.Component {
 				</Jumbotron>
 
 			</div>
-
-
-
-
-			// <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-			// 	<a className="navbar-brand" href="/">
-			// 		Home
-			//  	</a>
-			// 	<ul className="navbar-nav">
-			// 		{!this.state.isLoggedIn ?
-
-			// 			<li className="nav-item">
-			// 				<a className="nav-link" href="/login">Sign Up/Log in</a>
-			// 			</li>
-
-			// 			:
-
-			// 			<li className="nav-item">
-			// 				<a className="nav-link" onClick={this.handleLogout} href="*">Logout</a>
-			// 			</li>
-
-			// 		}
-			// 		<li className="nav-item">
-			// 			<a className="nav-link" href="/post">Post a Room</a>
-			// 		</li>
-			// 		<li className="nav-item">
-			// 			<a className="nav-link" href="/account">Account</a>
-			// 		</li>
-			// 		<li className="nav-item">
-			// 			<a className="nav-link" href="/questionnaire">Questionnaire</a>
-			// 		</li>
-
-			// 	</ul>
-			// </nav>
 		);
-
 	}
-
 }
 
 export default Navi;

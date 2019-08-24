@@ -52,11 +52,13 @@ class SearchForm extends React.Component {
                 lat: loc.lat,
                 lng: loc.lng
             };
-            console.log(info);
+
             API.findRooms(info)
                 .then(res => {
                     var data = res.data ? res.data : [];
-                    this.setState({ results: data })
+                    this.setState({ results: data }, () => {
+                        if (this.state.results.length === 0) window.alert("No rooms found");
+                    });
                 });
         });
 

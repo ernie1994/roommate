@@ -6,6 +6,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const passport = require("./passport");
 const session = require("express-session");
+const http = require("http").createServer(3005);
+const io = require("socket.io")(http);
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -16,9 +18,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-
-
+if (process.env.NODE_ENV) {
     app.use(express.static("client/build"));
 }
 // Add routes, both API and view
@@ -33,6 +33,7 @@ app.get("*", function (req, res) {
     } else {
         directory = "public";
     }
+
     res.sendFile(path.join(__dirname, `./client/${directory}/index.html`));
 
 });
@@ -42,4 +43,10 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/userlist");
 // Start the API server
 app.listen(PORT, function () {
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
+
+//socket.io code
+
+io.on("connection", function (socket) {
+    console.log("connected to socket io");
 });
