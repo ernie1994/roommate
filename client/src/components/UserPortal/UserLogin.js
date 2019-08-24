@@ -16,7 +16,7 @@ class UserLogin extends React.Component {
 					:
 					<Card>
 						<CardBody>
-							<h1>{this.props.test}!</h1>
+							
 							<Form>
 								<FormGroup>
 									<Label>Username</Label>
