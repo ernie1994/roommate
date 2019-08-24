@@ -18,6 +18,9 @@ router.route('/rooms')
     .post(roomController.create)
     .delete(roomController.deleteAll);
 
+router.route('/userRooms')
+	.get(roomController.getUserRooms);
+
 
 //authentication routes
 router.use(auth);

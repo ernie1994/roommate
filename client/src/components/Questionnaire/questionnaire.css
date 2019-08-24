@@ -6,14 +6,14 @@ body {
 }
 
 Form {
+
 	border: solid 1px #646464;
 	border-radius: 10px;
 	background-color: white;
 	background-image: linear-gradient(to bottom, white,  #c3def0 );
+
 	padding: 30px;
-	color: grey;
-	margin: 200px;
-	box-shadow:20px 20px 50px  #646464 ;
+	color: #343338;
 	
 	/* opacity: 0.85; */
 }
